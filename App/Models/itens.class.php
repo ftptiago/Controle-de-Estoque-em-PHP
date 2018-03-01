@@ -8,6 +8,48 @@
 
    class Itens extends Connect
    {
+
+    public function listItens ($idprodutos, $idFabricante)
+    {
+      $query = "SELECT * FROM `itens`,`fabricante`,`produtos` WHERE (`Fabricante_idFabricante` = `idFabricante` AND `Produto_CodRefProduto` = `CodRefProduto`) AND (`Fabricante_idFabricante` = '$idFabricante' AND `Produto_CodRefProduto` = '$idprodutos') ";
+      $result = mysqli_query($this->SQL, $query) or die ( mysqli_error($this->SQL));
+       $q = 0;
+       $v = 0;
+       $e = 0;
+     while($rowlist = mysqli_fetch_array($result)) {
+
+           $q = $q + $rowlist['QuantItens'];  
+           $v = $v + $rowlist['QuantItensVend'];   
+           $e = $q - $v;               
+           $NomeProduto = $rowlist['NomeProduto'];
+           $fabricante  = $rowlist['NomeFabricante'];
+      }
+      
+        return array('NomeProduto'=> $NomeProduto,'Fabricante'=> $fabricante , 'QuantItens' => $q, 'QuantItensVend' => $v, 'Estoque' => $e,); 
+
+    }
+
+    public function totalitens($value)
+    {
+      $this->query = "SELECT `Produto_CodRefProduto`, `Fabricante_idFabricante` FROM `itens` WHERE `itensPublic` = '$value' GROUP BY `Produto_CodRefProduto`, `Fabricante_idFabricante`";
+      $this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
+      while ($row = mysqli_fetch_array($this->result)) {
+        
+        $idprodutos = $row['Produto_CodRefProduto'];
+        $idFabricante = $row['Fabricante_idFabricante'];
+        
+        echo '<li>';
+       $resp = Itens::listItens($idprodutos, $idFabricante);
+        echo '<b> Produto: '.$resp['NomeProduto'];
+        echo ' / Fabricante: '.$resp['Fabricante'];
+        echo '</b> Comprados: '.$resp['QuantItens'];
+        echo ' | Vendidos: '.$resp['QuantItensVend'];
+        echo ' | Em Estoque: '.$resp['Estoque'];
+        echo '</li>';
+
+      }
+
+    }
    	
    	public function index($value)
    	{

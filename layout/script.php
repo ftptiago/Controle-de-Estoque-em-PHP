@@ -404,6 +404,7 @@ $header = '<header class="main-header">
             <li><a href="'.$url.'prod/"><i class="fa fa-circle-o"></i>Produtos</a></li>
             <li><a href="'.$url.'prod/addprod.php"><i class="fa fa-circle-o"></i>Add Produtos</a></li>
             <li><a href="'.$url.'itens/"><i class="fa fa-circle-o"></i>Itens</a></li>
+             <li><a href="'.$url.'itens/totalitens.php"><i class="fa fa-circle-o"></i>Total Itens</a></li>
             <li><a href="'.$url.'itens/additens.php"><i class="fa fa-circle-o"></i>Add Itens</a></li>
           </ul>
         </li>
