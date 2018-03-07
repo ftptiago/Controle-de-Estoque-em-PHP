@@ -8,7 +8,7 @@
  	
  	var $localhost = "localhost";
  	var $root = "root";
- 	var $passwd = "ftp8704";
+ 	var $passwd = "";
  	var $database = "controlestoque";
  	var $SQL;
  	
