@@ -25,7 +25,7 @@
 
  	function login($username, $password){
 
- 		$this->query  = "SELECT * FROM `usuario` WHERE `username` = '$username'";
+ 		$this->query  = "SELECT * FROM `usuario` WHERE `Username` = '$username'";
  		$this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL));
  		$this->total  = mysqli_num_rows($this->result);
 
