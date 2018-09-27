@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2.1
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 24-Jul-2017 às 19:14
--- Versão do servidor: 5.7.14
--- PHP Version: 5.6.25
+-- Host: localhost
+-- Generation Time: 27-Set-2018 às 08:26
+-- Versão do servidor: 5.7.23-0ubuntu0.16.04.1
+-- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -59,8 +59,8 @@ CREATE TABLE `itens` (
   `idItens` int(11) NOT NULL,
   `QuantItens` decimal(10,0) NOT NULL,
   `QuantItensVend` decimal(10,0) NOT NULL,
-  `ValCompItens` decimal(10,0) NOT NULL,
-  `ValVendItens` decimal(10,0) NOT NULL,
+  `ValCompItens` decimal(10,2) NOT NULL,
+  `ValVendItens` decimal(10,2) NOT NULL,
   `DataCompraItens` date NOT NULL,
   `DataVenci_Itens` date DEFAULT NULL,
   `ItensAtivo` tinyint(4) NOT NULL,
@@ -75,10 +75,10 @@ CREATE TABLE `itens` (
 --
 
 INSERT INTO `itens` (`idItens`, `QuantItens`, `QuantItensVend`, `ValCompItens`, `ValVendItens`, `DataCompraItens`, `DataVenci_Itens`, `ItensAtivo`, `ItensPublic`, `Produto_CodRefProduto`, `Fabricante_idFabricante`, `Usuario_idUser`) VALUES
-(1, '400', '0', '10', '15', '2017-04-24', '2022-04-24', 1, 1, 2, 1, 1),
-(2, '2000', '0', '200', '400', '2017-04-24', '2022-04-24', 1, 1, 1, 1, 1),
-(3, '50', '0', '10', '20', '2017-04-24', '2022-04-24', 1, 1, 1, 4, 1),
-(4, '100', '0', '10', '20', '2017-04-24', '2022-04-24', 1, 1, 2, 1, 1);
+(1, '400', '25', '10.00', '15.00', '2017-04-24', '2022-04-24', 1, 1, 2, 1, 1),
+(2, '2000', '160', '200.00', '400.00', '2017-04-24', '2022-04-24', 1, 1, 1, 1, 1),
+(3, '50', '0', '10.00', '20.00', '2017-04-24', '2022-04-24', 1, 1, 1, 4, 1),
+(4, '100', '0', '10.00', '20.00', '2017-04-24', '2022-04-24', 1, 1, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -156,9 +156,33 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUser`, `Username`, `Email`, `Password`, `imagem`, `Dataregistro`, `Permissao`) VALUES
-(1, 'admin', 'admin@estoque.com', '21232f297a57a5a743894a0e4a801fc3', 'dist/img/fabriciopaixao.jpg', '2017-04-03', 1);
-INSERT INTO `usuario` (`idUser`, `Username`, `Email`, `Password`, `imagem`, `Dataregistro`, `Permissao`) VALUES
+(1, 'admin', 'admin@estoque.com', '21232f297a57a5a743894a0e4a801fc3', 'dist/img/fabriciopaixao.jpg', '2017-04-03', 1),
 (2, 'vendedor', 'vendedor@estoque.com', '21232f297a57a5a743894a0e4a801fc3', 'dist/img/fabriciopaixao.jpg', '2017-04-03', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `vendas`
+--
+
+CREATE TABLE `vendas` (
+  `idvendas` int(11) NOT NULL,
+  `quantitens` int(11) NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `iditem` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  `datareg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `vendas`
+--
+
+INSERT INTO `vendas` (`idvendas`, `quantitens`, `valor`, `iditem`, `idusuario`, `datareg`) VALUES
+(1, 5, '75.00', 1, 2, '2018-09-26 12:34:53'),
+(2, 10, '150.00', 1, 2, '2018-09-26 12:35:33'),
+(3, 150, '60000.00', 2, 2, '2018-09-26 12:38:23'),
+(4, 10, '4000.00', 2, 2, '2018-09-27 11:18:50');
 
 --
 -- Indexes for dumped tables
@@ -202,6 +226,12 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idUser`);
 
 --
+-- Indexes for table `vendas`
+--
+ALTER TABLE `vendas`
+  ADD PRIMARY KEY (`idvendas`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -209,7 +239,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `fabricante`
 --
 ALTER TABLE `fabricante`
-  MODIFY `idFabricante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idFabricante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `itens`
 --
@@ -224,12 +254,17 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT for table `representante`
 --
 ALTER TABLE `representante`
-  MODIFY `idRepresentante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idRepresentante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `vendas`
+--
+ALTER TABLE `vendas`
+  MODIFY `idvendas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --

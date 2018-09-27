@@ -66,7 +66,7 @@ echo '<div class="content-wrapper">
             $id = $_POST['id'];
             $quant = $_POST['quant'];
             $vendas = new Vendas;
-            $vendas->itensVendidos($id, $quant, $perm);
+            $vendas->itensVendidos($id, $quant, $idUsuario, $perm);
           }
 
         echo'

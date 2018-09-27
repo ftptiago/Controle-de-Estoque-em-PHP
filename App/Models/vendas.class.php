@@ -8,7 +8,7 @@ require_once 'connect.php';
 
 class Vendas extends Connect
 {
-	public function itensVendidos($id, $quant, $perm)
+	public function itensVendidos($iditem, $quant, $idUsuario, $perm)
 	{
 		
         if($perm != 2){
@@ -16,7 +16,7 @@ class Vendas extends Connect
           exit();
         }
 
-        $this->query = "SELECT * FROM `itens` WHERE `idItens`= '$id'";
+        $this->query = "SELECT * FROM `itens` WHERE `idItens`= '$iditem'";
         $this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL));
 
         if($this->result){
@@ -32,10 +32,18 @@ class Vendas extends Connect
 
         			if($q >= $quantotal){
 
-        				$this->query = "UPDATE `itens` SET `QuantItensVend` = '$quantotal' WHERE `idItens`= '$id'";
+                        $valor = ($row['ValVendItens'] * $quant);
+
+                        $this->query = "INSERT INTO `vendas` (`quantitens`, `valor`, `iditem`, `idusuario`) VALUES ('$quant', '$valor', '$iditem', '$idUsuario')";
+                        if($this->result = mysqli_query($this->SQL, $this->query) or die (mysqli_error($this->SQL))){
+
+
+        				$this->query = "UPDATE `itens` SET `QuantItensVend` = '$quantotal' WHERE `idItens`= '$iditem'";
         				if($this->result = mysqli_query($this->SQL, $this->query) or die (mysqli_error($this->SQL))){
 
         					echo 'Venda efetuada!';
+                        }
+
         				}else{
         					echo 'Não foi possivel efetuar a venda!';
         				}
