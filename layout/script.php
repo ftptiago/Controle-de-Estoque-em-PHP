@@ -1,6 +1,6 @@
 <?php
 
-$url = 'http://localhost/Controle-de-Estoque-em-PHP/views/';
+$url = 'http://localhost/webestoque/views/';
 
 $head = '<!DOCTYPE html>
 <html>
@@ -392,6 +392,8 @@ $header = '<header class="main-header">
             </span>
           </a>
         </li>
+<!-- Produtos -->
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i>
@@ -448,6 +450,21 @@ $header = '<header class="main-header">
           <ul class="treeview-menu">
             <li><a href="'.$url.'usuarios/"><i class="fa fa-circle-o"></i>Lista</a></li>
             <li><a href="'.$url.'usuarios/addusuarios.php"><i class="fa fa-circle-o"></i>Add Usuários</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i>
+            <span>Cliente</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="'.$url.'cliente/"><i class="fa fa-circle-o"></i>Lista</a></li>
+            <li><a href="'.$url.'cliente/addcliente.php"><i class="fa fa-circle-o"></i>Add Cliente</a></li>
+            
           </ul>
         </li>
 

@@ -8,9 +8,12 @@ require_once 'connect.php';
 
 class Vendas extends Connect
 {
-	public function itensVendidos($iditem, $quant, $idUsuario, $perm)
+
+
+	public function itensVendidos($iditem, $quant, $cliente, $email, $cpfcliente, $idUsuario, $perm)
 	{
-		
+
+    	
         if($perm != 2){
           echo "Você não tem permissão!";
           exit();
@@ -34,7 +37,21 @@ class Vendas extends Connect
 
                         $valor = ($row['ValVendItens'] * $quant);
 
-                        $this->query = "INSERT INTO `vendas` (`quantitens`, `valor`, `iditem`, `idusuario`) VALUES ('$quant', '$valor', '$iditem', '$idUsuario')";
+                        $id = Vendas::idCliente($cpfcliente);
+
+                        if($id > 0){
+                            $idCliente = $id;
+                        }else{
+
+                            $this->novoclient = "INSERT INTO `cliente`(`idCliente`, `NomeCliente`, `EmailCliente`, `cpfCliente`, `statusCliente`, `Usuario_idUsuario`) VALUES (NULL,'$cliente','$email','$cpfcliente',1,'$idUsuario')";
+
+                               if(mysqli_query($this->SQL, $this->novoclient) or die (mysqli_error($this->SQL))){
+                                $idCliente = mysqli_insert_id($this->SQL);
+                             }                            
+                        }
+                        
+                        
+                        $this->query = "INSERT INTO `vendas`(`idvendas`, `quantitens`, `valor`, `iditem`, `cliente_idCliente`, `idusuario`) VALUES (NULL, '$quant', '$valor', '$iditem', '$idCliente', '$idUsuario')";
                         if($this->result = mysqli_query($this->SQL, $this->query) or die (mysqli_error($this->SQL))){
 
 
@@ -65,5 +82,17 @@ class Vendas extends Connect
         }
 
 
-	}
-}
+	}// itensVendidos
+
+    public function idcliente($cpfCliente){
+
+        $this->client = "SELECT * FROM `cliente` WHERE `cpfCliente` = '$cpfCliente'";
+
+            if($this->resultcliente = mysqli_query($this->SQL, $this->client)  or die (mysqli_error($this->SQL))){
+
+                $row = mysqli_fetch_array($this->resultcliente);
+                return $idCliente = $row['idCliente'];
+            }
+    }
+
+}//Class

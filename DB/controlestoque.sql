@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 27-Set-2018 às 08:26
--- Versão do servidor: 5.7.23-0ubuntu0.16.04.1
+-- Generation Time: 02-Nov-2018 às 19:21
+-- Versão do servidor: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -19,6 +19,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `controlestoque`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `idCliente` int(11) NOT NULL,
+  `NomeCliente` varchar(100) NOT NULL,
+  `EmailCliente` varchar(100) NOT NULL,
+  `cpfCliente` int(11) NOT NULL,
+  `statusCliente` int(1) NOT NULL,
+  `Usuario_idUsuario` int(11) NOT NULL,
+  `dataRegCliente` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`idCliente`, `NomeCliente`, `EmailCliente`, `cpfCliente`, `statusCliente`, `Usuario_idUsuario`, `dataRegCliente`) VALUES
+(1, 'teste', 'teste', 1234, 1, 2, '2018-11-01 23:39:57'),
+(2, 'teste2', 'teste2', 12345, 1, 2, '2018-11-01 23:49:55'),
+(3, 'teste3', 'teste3@teste3.com', 2345, 1, 2, '2018-11-02 22:07:51'),
+(4, 'teste3', 'teste3@teste3.com', 23456, 1, 2, '2018-11-02 22:10:11'),
+(5, 'teste3', 'teste3@teste3.com', 23456989, 1, 2, '2018-11-02 22:12:05');
 
 -- --------------------------------------------------------
 
@@ -67,18 +94,17 @@ CREATE TABLE `itens` (
   `ItensPublic` int(1) NOT NULL,
   `Produto_CodRefProduto` int(11) NOT NULL,
   `Fabricante_idFabricante` int(11) NOT NULL,
-  `Usuario_idUser` int(11) NOT NULL
+  `Usuario_idUser` int(11) NOT NULL,
+  `DataRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `itens`
 --
 
-INSERT INTO `itens` (`idItens`, `QuantItens`, `QuantItensVend`, `ValCompItens`, `ValVendItens`, `DataCompraItens`, `DataVenci_Itens`, `ItensAtivo`, `ItensPublic`, `Produto_CodRefProduto`, `Fabricante_idFabricante`, `Usuario_idUser`) VALUES
-(1, '400', '25', '10.00', '15.00', '2017-04-24', '2022-04-24', 1, 1, 2, 1, 1),
-(2, '2000', '160', '200.00', '400.00', '2017-04-24', '2022-04-24', 1, 1, 1, 1, 1),
-(3, '50', '0', '10.00', '20.00', '2017-04-24', '2022-04-24', 1, 1, 1, 4, 1),
-(4, '100', '0', '10.00', '20.00', '2017-04-24', '2022-04-24', 1, 1, 2, 1, 1);
+INSERT INTO `itens` (`idItens`, `QuantItens`, `QuantItensVend`, `ValCompItens`, `ValVendItens`, `DataCompraItens`, `DataVenci_Itens`, `ItensAtivo`, `ItensPublic`, `Produto_CodRefProduto`, `Fabricante_idFabricante`, `Usuario_idUser`, `DataRegistro`) VALUES
+(11, '5', '2', '7.00', '11.00', '2018-10-27', '2018-10-31', 1, 1, 4, 2, 1, '2018-10-27 20:38:39'),
+(12, '100', '40', '99.00', '1100.00', '2018-10-27', '2018-10-31', 1, 0, 3, 4, 1, '2018-10-27 20:43:12');
 
 -- --------------------------------------------------------
 
@@ -170,6 +196,7 @@ CREATE TABLE `vendas` (
   `quantitens` int(11) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `iditem` int(11) NOT NULL,
+  `cliente_idCliente` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `datareg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -178,15 +205,23 @@ CREATE TABLE `vendas` (
 -- Extraindo dados da tabela `vendas`
 --
 
-INSERT INTO `vendas` (`idvendas`, `quantitens`, `valor`, `iditem`, `idusuario`, `datareg`) VALUES
-(1, 5, '75.00', 1, 2, '2018-09-26 12:34:53'),
-(2, 10, '150.00', 1, 2, '2018-09-26 12:35:33'),
-(3, 150, '60000.00', 2, 2, '2018-09-26 12:38:23'),
-(4, 10, '4000.00', 2, 2, '2018-09-27 11:18:50');
+INSERT INTO `vendas` (`idvendas`, `quantitens`, `valor`, `iditem`, `cliente_idCliente`, `idusuario`, `datareg`) VALUES
+(1, 5, '75.00', 1, 0, 2, '2018-09-26 12:34:53'),
+(2, 10, '150.00', 1, 0, 2, '2018-09-26 12:35:33'),
+(3, 150, '60000.00', 2, 0, 2, '2018-09-26 12:38:23'),
+(4, 10, '4000.00', 2, 0, 2, '2018-09-27 11:18:50'),
+(5, 20, '22000.00', 12, 2, 2, '2018-11-01 23:49:55'),
+(6, 20, '22000.00', 12, 2, 2, '2018-11-01 23:55:56');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idCliente`);
 
 --
 -- Indexes for table `fabricante`
@@ -236,6 +271,11 @@ ALTER TABLE `vendas`
 --
 
 --
+-- AUTO_INCREMENT for table `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `fabricante`
 --
 ALTER TABLE `fabricante`
@@ -244,7 +284,7 @@ ALTER TABLE `fabricante`
 -- AUTO_INCREMENT for table `itens`
 --
 ALTER TABLE `itens`
-  MODIFY `idItens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idItens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `produtos`
 --
@@ -264,7 +304,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `idvendas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idvendas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Constraints for dumped tables
 --

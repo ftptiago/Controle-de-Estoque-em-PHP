@@ -45,28 +45,51 @@ echo '<div class="content-wrapper">
             <div class="box-body">';
 ?>
             <form action="index.php" method="POST">
-              
-              <div>
+              <div class="box-body">
+
+              <div class="form-group">
                 <label>ID Item</label>
-                <input type="text" name="id">
+                <input type="text" class="form-control" name="id">
               </div>
-
+              <div class="form-group">
                 <label>Quantidade Item</label>
-                <input type="text" name="quant">
+                <input type="text" class="form-control" name="quant">
               </div>
 
-              <div>
-                <button type="submit" name="comprar">Comprar</button>
-              </div>
+               
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Nome Cliente</label>
+                    <input type="text" name="nomeCliente" class="form-control" id="exampleInputEmail1" placeholder="Nome Cliente">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">E-mail</label>
+                    <input type="text" name="emailCliente" class="form-control" id="exampleInputEmail1" placeholder="E-mail">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">CPF</label>
+                    <input type="number" name="cpfcliente" class="form-control" id="exampleInputEmail1" placeholder="CPF">
+                  </div>
+                  
+                  
+                  
+                   <input type="hidden" name="iduser" value="'.$idUsuario.'">
+                <!-- /.box-body -->
 
-            </form>
+                <div class="box-footer">
+                  <button type="submit" name="comprar" class="btn btn-primary" value="Cadastrar">Comprar</button>
+                  <a class="btn btn-danger" href="../../views/prod">Cancelar</a>
+                </div>
+              </form>
 
 <?php
           if(isset($_POST['id']) != NULL){
             $id = $_POST['id'];
             $quant = $_POST['quant'];
+            $cliente = $_POST['nomeCliente'];
+            $email = $_POST['emailCliente'];
+            $cpfcliente = $_POST['cpfcliente'];
             $vendas = new Vendas;
-            $vendas->itensVendidos($id, $quant, $idUsuario, $perm);
+            $vendas->itensVendidos($id, $quant, $cliente, $email, $cpfcliente, $idUsuario, $perm);
           }
 
         echo'
