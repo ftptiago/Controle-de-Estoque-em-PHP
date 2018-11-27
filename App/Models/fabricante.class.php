@@ -123,23 +123,28 @@
         $this->query = "SELECT * FROM `fabricante` WHERE `NomeFabricante` = '$NomeFabricante'";
         $this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
 
-        if($this->result != NULL){
+        /*--Alteração de codigo para corriguir erro de verificação 
+        se fabricante existe ou não no DB. */
 
+        $total = mysqli_num_rows($this->result); 
+
+        if($total > 0){       
           $row = mysqli_fetch_array($this->result);
 
           $idFabricante = $row['idFabricante'];
+
         }else{
 
-     		$this->query = "INSERT INTO `fabricante`(`idFabricante`, `NomeFabricante`, `CNPJFabricante`, `EmailFabricante`, `EnderecoFabricante`, `TelefoneFabricante`,`Public`, `Ativo`, `Usuario_idUser`) VALUES (NULL, '$NomeFabricante', '$CNPJFabricante', '$EmailFabricante', '$EnderecoFabricante', '$TelefoneFabricante', 1 , 1 , '$idUsuario')";
-     		
-        $this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL));
-
+         $query = "INSERT INTO `fabricante`(`NomeFabricante`, `CNPJFabricante`, `EmailFabricante`, `EnderecoFabricante`, `TelefoneFabricante`, `Public`, `Ativo`, `Usuario_idUser`) VALUES ('$NomeFabricante', '$CNPJFabricante', '$EmailFabricante', '$EnderecoFabricante', '$TelefoneFabricante', 1 , 1 , '$idUsuario')";
+        
+          $result = mysqli_query($this->SQL, $query) or die(mysqli_error($this->SQL));
           $idFabricante = mysqli_insert_id($this->SQL);
+        
         }
         
-          if($status == 1){
+          if($idFabricante > 0){
 
-          $this->representante = "INSERT INTO `representante`(`idRepresentante`, `NomeRepresentante`, `TelefoneRepresentante`, `EmailRepresentante`,`repAtivo` ,`Fabricante_idFabricante`, `Usuario_idUser`) VALUES (NULL, '$NomeRepresentante', '$TelefoneRepresentante', '$EmailRepresentante',1 , '$idFabricante', '$idUsuario')";
+          $this->representante = "INSERT INTO `representante`(`idRepresentante`, `NomeRepresentante`, `TelefoneRepresentante`, `EmailRepresentante`,`repAtivo`,`repPublic`, `Fabricante_idFabricante`, `Usuario_idUser`) VALUES (NULL, '$NomeRepresentante', '$TelefoneRepresentante', '$EmailRepresentante',1 , 1,'$idFabricante', '$idUsuario')";
              
               if($this->rep = mysqli_query($this->SQL, $this->representante) or die(mysqli_error($this->SQL))){
                   header('Location: ../../views/fabricante/index.php?alert=1'); 
@@ -147,10 +152,13 @@
                   header('Location: ../../views/fabricante/index.php?alert=0');
               } 
 
+            }else{
+             header("Location: ../../views/fabricante/index.php?alert=0");
             }
-             header('Location: ../../views/fabricante/index.php?alert=0');
             
      	}//Insert
+
+      
 
       public function EditFabricante($idFabricante){
 

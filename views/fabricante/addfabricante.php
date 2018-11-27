@@ -67,12 +67,12 @@ if($perm != 1){
                     <input type="text" name="TelefoneFabricante" class="form-control" id="exampleInputEmail1" placeholder="Telefone">
                   </div>
                   <hr />
-                  <div class="form-group">
+                  <div class="form-group"><label for="exampleInputEmail1">Publicar</label>
                   <label class="radio-inline">
-                    <input type="radio" name="status" value="1">Sim
+                    <input type="radio" name="Public" value="1">Sim
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="status" value="0">Não
+                    <input type="radio" name="Public" value="0">Não
                   </label>
                   </div>
 

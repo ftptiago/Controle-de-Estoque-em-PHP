@@ -6,14 +6,13 @@ if(isset($_POST['upload']) == 'Cadastrar'){
 
 $NomeFabricante = $_POST['NomeFabricante'];
 
-
 //---Fabricante---//
 $CNPJFabricante = $_POST['CNPJFabricante'];
 $EmailFabricante = $_POST['EmailFabricante'];
 $EnderecoFabricante = $_POST['EnderecoFabricante'];
 $TelefoneFabricante = $_POST['TelefoneFabricante'];
 $Public = $_POST['Public'];
-$status = $_POST['status'];
+$status = 1;
 
 //--Representante--//
 
