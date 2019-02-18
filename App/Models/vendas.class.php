@@ -13,7 +13,8 @@ class Vendas extends Connect
 	public function itensVendidos($iditem, $quant, $cliente, $email, $cpfcliente, $idUsuario, $perm)
 	{
 
-    	
+    	$cpfcliente = intval(Connect::limpaCPF_CNPJ($cpfcliente));
+
         if($perm != 2){
           echo "Você não tem permissão!";
           exit();
@@ -36,11 +37,12 @@ class Vendas extends Connect
         			if($q >= $quantotal){
 
                         $valor = ($row['ValVendItens'] * $quant);
+                         
+                        $id = Vendas::idCliente($cpfcliente); // Verifica se o cliente existe no DB.
 
-                        $id = Vendas::idCliente($cpfcliente);
 
-                        if($id > 0){
-                            $idCliente = $id;
+                        if($id > 0){ // Se o cliente existir, Retorne o ID do cliente
+                            $idCliente = $id; // ID do cliente
                         }else{
 
                             $this->novoclient = "INSERT INTO `cliente`(`idCliente`, `NomeCliente`, `EmailCliente`, `cpfCliente`, `statusCliente`, `Usuario_idUsuario`) VALUES (NULL,'$cliente','$email','$cpfcliente',1,'$idUsuario')";
@@ -58,11 +60,11 @@ class Vendas extends Connect
         				$this->query = "UPDATE `itens` SET `QuantItensVend` = '$quantotal' WHERE `idItens`= '$iditem'";
         				if($this->result = mysqli_query($this->SQL, $this->query) or die (mysqli_error($this->SQL))){
 
-        					echo 'Venda efetuada!';
+        					echo 'Venda efetuada!'; 
                         }
 
         				}else{
-        					echo 'Não foi possivel efetuar a venda!';
+        					echo 'Erro - Venda não efetuada!'; 
         				}
 
         			}else{
@@ -95,4 +97,5 @@ class Vendas extends Connect
             }
     }
 
+    
 }//Class
