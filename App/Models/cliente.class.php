@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ * Class Cliente
  */
 
 require_once 'connect.php';
@@ -34,15 +34,50 @@ class Cliente extends Connect
      		}
    	}//fim -- index
 
-	function updateCliente($idCliente, $NomeCliente, $emailCliente, $cpfCliente, $idUsuario, $perm){
+    function insertCliente($NomeCliente, $EmailCliente, $cpfCliente, $idUsuario, $perm)
+    {
+       if($perm == 1){
+
+        $cpfCliente = connect::limpaCPF_CNPJ($cpfCliente);
+
+        $idCliente = Cliente::idCliente($cpfCliente);
+
+        if($idCliente > 0){
+          return 2;
+        }else{
+
+        $NomeCliente = mysqli_real_escape_string($this->SQL, $NomeCliente);
+        $EmailCliente = mysqli_real_escape_string($this->SQL, $EmailCliente);
+        $cpfCliente = mysqli_real_escape_string($this->SQL, $cpfCliente);
+
+        $query = "INSERT INTO `cliente`(`idCliente`, `NomeCliente`, `EmailCliente`, `cpfCliente`, `statusCliente`, `Usuario_idUsuario`) VALUES (NULL,'$NomeCliente','$EmailCliente','$cpfCliente',1,'$idUsuario')";
+        $result = mysqli_query($this->SQL, $query) or die ( mysqli_error($this->SQL));
+
+        if($result){
+
+            return 1;
+          }else{
+            return 0;
+          }
+        }
+
+          mysqli_close($this->SQL);
+
+
+      }
+    }//Insert Cliente
+
+	function updateCliente($idCliente, $NomeCliente, $EmailCliente, $cpfCliente, $idUsuario, $perm){
 
         if($perm == 1){
 
+          $cpfCliente = connect::limpaCPF_CNPJ($cpfCliente);
+
           $NomeCliente = mysqli_real_escape_string($this->SQL, $NomeCliente);
-          $emailCliente = mysqli_real_escape_string($this->SQL, $emailCliente);
+          $EmailCliente = mysqli_real_escape_string($this->SQL, $EmailCliente);
           $cpfCliente = mysqli_real_escape_string($this->SQL, $cpfCliente);
 
-          $this->query = "UPDATE `cliente` SET `NomeCliente`='$NomeCliente',`EmailCliente`='$emailCliente',`cpfCliente`='$cpfCliente', `Usuario_idUsuario`= '$idUsuario' WHERE `idCliente`= '$idCliente'";
+          $this->query = "UPDATE `cliente` SET `NomeCliente`='$NomeCliente',`EmailCliente`='$EmailCliente',`cpfCliente`='$cpfCliente', `Usuario_idUsuario`= '$idUsuario' WHERE `idCliente`= '$idCliente'";
           $this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
 
           if($this->result){
@@ -87,4 +122,15 @@ class Cliente extends Connect
         mysqli_close($this->SQL);
 
       }
+
+      public function idcliente($cpfCliente){
+
+        $this->client = "SELECT * FROM `cliente` WHERE `cpfCliente` = '$cpfCliente'";
+
+            if($this->resultcliente = mysqli_query($this->SQL, $this->client)  or die (mysqli_error($this->SQL))){
+
+                $row = mysqli_fetch_array($this->resultcliente);
+                return $idCliente = $row['idCliente'];
+            }
+    }
 }

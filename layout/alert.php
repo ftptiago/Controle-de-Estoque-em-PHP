@@ -1,9 +1,16 @@
 <?php
 
-if(isset($_GET['alert'])){
+if(isset($_GET['alert']) || isset($_SESSION['alert']) != NULL){
+
+	if(isset($_GET['alert']) != NULL){
+
+		$value = $_GET['alert'];
+	}else{
+		$value = $_SESSION['alert'];
+	}
 
 echo '<div class="box-body">';
-	switch ($_GET['alert']) {
+	switch ($value) {
 		case '0':
 			echo '<div class="alert alert-warning alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -18,7 +25,16 @@ echo '<div class="box-body">';
                 
               </div>';
 			break;
+
+		case '2':
+			echo '<div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-warning"></i> Error! Cliente já cadastrado.</h4>
+                </div>';
+			break;
 		
 		}//switch
 	echo'</div>';
+
+	unset($_GET['alert'], $_SESSION['alert']);
 }
