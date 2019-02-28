@@ -26,25 +26,11 @@ echo '<div class="content-wrapper">
       <!-- Small boxes (Stat box) -->
       <div class="row">
       	<div class="box box-primary">
-            <div class="box-header">
-              <i class="ion ion-clipboard"></i>
-
-              <h3 class="box-title">Lista de Itens</h3>
-
-              <div class="box-tools pull-right">
-                <ul class="pagination pagination-sm inline">
-                  <li><a href="#">&laquo;</a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">&raquo;</a></li>
-                </ul>
-              </div>
-            </div>
+            
             <!-- /.box-header -->
             <div class="box-body">';
 ?>
-            <form action="index.php" method="POST">
+            <form id="form2" action="../../App/Database/insertVendas.php" method="POST">
               <div class="box-body">
 
               <div class="form-group">
@@ -82,14 +68,9 @@ echo '<div class="content-wrapper">
               </form>
 
 <?php
-          if(isset($_POST['id']) != NULL){
-            $id = $_POST['id'];
-            $quant = $_POST['quant'];
-            $cliente = $_POST['nomeCliente'];
-            $email = $_POST['emailCliente'];
-            $cpfcliente = $_POST['cpfcliente'];
-            $vendas = new Vendas;
-            $vendas->itensVendidos($id, $quant, $cliente, $email, $cpfcliente, $idUsuario, $perm);
+          if(!empty($_SESSION['msg'])){
+            echo ' <div class="col-xs-12 col-md-12 text-success">'. $_SESSION['msg'].'</div>';
+            unset($_SESSION['msg']);
           }
 
         echo'

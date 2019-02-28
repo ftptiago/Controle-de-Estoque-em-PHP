@@ -60,17 +60,23 @@ class Vendas extends Connect
         				$this->query = "UPDATE `itens` SET `QuantItensVend` = '$quantotal' WHERE `idItens`= '$iditem'";
         				if($this->result = mysqli_query($this->SQL, $this->query) or die (mysqli_error($this->SQL))){
 
-        					echo 'Venda efetuada!'; 
+        					$_SESSION['msg'] = 'Venda efetuada!'; 
+                            header('Location: ../../views/vendas/');
                         }
 
         				}else{
-        					echo 'Erro - Venda não efetuada!'; 
+        					$_SESSION['msg'] = 'Erro - Venda não efetuada!';
+                            header('Location: ../../views/vendas/'); 
         				}
 
         			}else{
 
         				$estoque = $row['QuantItens'] - $row['QuantItensVend'];
         				echo 'Quantidade maior do que em estoque! </br> Quantidade em estoque disponivel: '.$estoque;
+
+                        $_SESSION['msg'] = $estoque;
+                        header('Location: ../../views/vendas/');
+
         			}
 
 
