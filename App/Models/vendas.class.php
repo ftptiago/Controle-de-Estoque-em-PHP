@@ -72,9 +72,9 @@ class Vendas extends Connect
         			}else{
 
         				$estoque = $row['QuantItens'] - $row['QuantItensVend'];
-        				echo 'Quantidade maior do que em estoque! </br> Quantidade em estoque disponivel: '.$estoque;
+        				$retorno = 'Quantidade maior do que em estoque! </br> Quantidade em estoque disponivel: '.$estoque;
 
-                        $_SESSION['msg'] = $estoque;
+                        $_SESSION['msg'] = $retorno;
                         header('Location: ../../views/vendas/');
 
         			}
