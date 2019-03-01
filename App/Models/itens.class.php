@@ -179,14 +179,14 @@
         $Produto_CodRefProduto = $row['Produto_CodRefProduto'];
         $Fabricante_idFabricante = $row['Fabricante_idFabricante'];
 
-        return $resp = array('Itens' => ['idItens' => $idItens,
+        return $resp = array('Itens' => array('idItens' => $idItens,
           'QuantItens'   => $QuantItens,
           'ValCompItens' => $ValCompItens,
           'ValVendItens' => $ValVendItens,
           'DataCompraItens' => $DataCompraItens,
           'DataVenci_Itens' => $DataVenci_Itens,
           'CodRefProduto' => $Produto_CodRefProduto,
-          'idFabricante' => $Fabricante_idFabricante ] , );  
+          'idFabricante' => $Fabricante_idFabricante ), );  
       }
       
     }
