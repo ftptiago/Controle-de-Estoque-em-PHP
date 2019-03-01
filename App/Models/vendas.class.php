@@ -13,7 +13,7 @@ class Vendas extends Connect
 	public function itensVendidos($iditem, $quant, $cliente, $email, $cpfcliente, $idUsuario, $perm)
 	{
 
-    	$cpfcliente = intval(Connect::limpaCPF_CNPJ($cpfcliente));
+    	$cpfcliente = Connect::limpaCPF_CNPJ($cpfcliente);
 
         if($perm != 2){
           echo "Você não tem permissão!";
