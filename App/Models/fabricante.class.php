@@ -175,7 +175,7 @@
             $Ativo = $row['Ativo'];
             $Usuario_idUser  = $row['Usuario_idUser'];
 
-              $array = array('Fabricante' => [ 'Nome' => $NomeFabricante, 'CNPJ' => $CNPJFabricante, 'Email'=> $EmailFabricante, 'Endereco'=>$EnderecoFabricante, 'Telefone' => $TelefoneFabricante, 'Ativo' => $Ativo, 'Usuario' => $Usuario_idUser,]);
+              $array = array('Fabricante' => array('Nome' => $NomeFabricante, 'CNPJ' => $CNPJFabricante, 'Email'=> $EmailFabricante, 'Endereco'=>$EnderecoFabricante, 'Telefone' => $TelefoneFabricante, 'Ativo' => $Ativo, 'Usuario' => $Usuario_idUser ),);
               return $array;
           }
 
