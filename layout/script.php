@@ -93,6 +93,84 @@ $head = '<!DOCTYPE html>
  </script>
 
  <!-- FIM Lista Cliente CPF --> 
+
+ <!-- Consulta Qtd venda -->
+
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+      $("#prodSubmit").click(function()  {
+    var prodSubmit = $("#prodSubmit").val();
+    var idItem = $("#idItem").val();
+    var qtd = $("#qtd").val();
+    
+    $.ajax({
+      type: "POST",
+      url: "'.$url.'../App/Database/carrinho.php",
+      data: {prodSubmit: prodSubmit, idItem: idItem, qtd:qtd},
+      success: function(data){
+              $(\'#listable\').fadeIn();  
+              $(\'#listable\').html(data);
+
+          }
+      });
+    }); 
+
+    $(\'#listable\').on("click","li", function(){  
+           $(\'#idItem\').val($(data).text());
+           $(\'#qtd\').val($(data).text());  
+           $(\'#listable\').fadeOut();
+          
+            return false;
+
+           <!-- console.log(event.target);-->
+      });           
+            
+    
+ });  
+ </script>
+
+ <script type="text/javascript">
+(function ($) {
+
+    RemoveTableRow = function (handler) {
+        var tr = $(handler).closest(\'tr\');
+
+        tr.fadeOut(400, function () {
+            tr.remove();
+        });
+
+        return false;
+    };
+
+    AddTableRow = function () {
+
+        var newRow = $("<tr>");
+        var cols = \'<td></td>\';
+        var tabela = document.getElementById(\'products-table\');
+        var a = (tabela.getElementsByTagName(\'tr\'));
+        var b = a.length;
+        var i = b - 2;
+        var cont = 7 + i;
+
+        cols += \'<td><input type="text" class="form-control" id="idItem" name="idItem[]" autocomplete="off" /></td>\';
+        cols += \'<td><input type="text" class="form-control" id="qtd" name="qtd[]" autocomplete="off" /><span id="stv" name="stv[]"></span></td>\';
+        cols += \'<td class="actions">\';
+        cols += \'<button class="btn btn-danger btn-xs" onclick="RemoveTableRow(this)" type="button"><i class="fa fa-trash"></i></button>\';
+        cols += \'</td>\';
+
+        newRow.append(cols);
+        $("#products-table").append(newRow);
+        return false;
+    };
+
+
+})(jQuery);
+</script>
+
+<!-- Consulta Qtd Vendas -->
+
 	
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

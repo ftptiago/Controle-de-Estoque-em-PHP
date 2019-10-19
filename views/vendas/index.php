@@ -30,9 +30,14 @@ echo '<div class="content-wrapper">
             
             <!-- /.box-header -->
             <div class="box-body">';
+
+            if(!empty($_SESSION['msg'])){
+            echo ' <div class="col-xs-12 col-md-12 text-success">'. $_SESSION['msg'].'</div>';
+            unset($_SESSION['msg'], $_SESSION['CPF'], $_SESSION['Cliente'], $_SESSION['Email'], $_SESSION['cart']);
+          }
 ?>
 
-<!-- Cliente list PHP -->
+ <!-- Cliente list PHP -->
   <?php  
 
           if(isset($_POST['CPF'])){ 
@@ -78,22 +83,13 @@ echo '<div class="content-wrapper">
           </form> 
  </div>       
 <!-- Cliente list FIM -->
-       
 
-     <form id="form2" action="../../App/Database/insertVendas.php" method="POST">
+
+            <form id="form2" action="../../App/Database/insertVendas.php" method="POST">
               <div class="box-body">
 
-              <div class="form-group">
-                <label>ID Item</label>
-                <input type="text" class="form-control" name="id">
-              </div>
-              <div class="form-group">
-                <label>Quantidade Item</label>
-                <input type="text" class="form-control" name="quant">
-              </div>
 
-               <!--Aula 22 -->
-                  <div class="form-group">
+                <div class="form-group">
                   <label for="exampleInputEmail1">Nome Cliente</label>
                   <input type="text" name="nomeCliente" class="form-control" id="exampleInputnome1" placeholder="Nome Cliente" value="<?php if(isset($_SESSION['Cliente'])){ echo $_SESSION['Cliente']; } ?>"/>
                 </div>
@@ -105,24 +101,101 @@ echo '<div class="content-wrapper">
                   <label for="exampleInputEmail1">CPF</label>
                   <input type="number" name="cpfcliente" class="form-control" id="exampleInputcpf1" placeholder="CPF" value="<?php if(isset($_SESSION['CPF'])){ echo $_SESSION['CPF']; } ?>" />
                 </div>
-		<!--Aula 22 -->
-                  
-                  
-                  
+
+<!-- Tabela de produtos -->
+
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Lista de Produtos</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <div class="row">
+        
+        <div class="form-group col-xs-12 col-sm-4">
+          
+          <input type="number" id="idItem" name="idItem" class="form-control" placeholder="Item">
+        </div>
+        <div class="form-group col-xs-12 col-sm-4">
+          
+          <input type="number" id="qtd" name="qtde" class="form-control" placeholder="Quantidade">
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-4">
+          <button type="button" id="prodSubmit" name="prodSubmit" onclick="prodSubmit();" value="carrinho" class="btn btn-primary col-xs-12">Registrar</button>
+        </div>
+      </div>
+
+        <table class="table table-bordered" id="products-table">
+          
+          <tr>
+            <th style="width: 10px">#</th>
+            <th>Cod.</th>
+            <th>Produto</th>
+            <th>Qtde</th>
+            <th style="width:40px" title="Remover">Del</th>
+          </tr>
+          
+
+          <tbody id="listable">
+            
+            <?php          
+
+
+            if(count($_SESSION['itens']) == 0){
+              echo '<tr>
+              <td colspan="5">
+              <b>Carrinho Vazio</b>
+              </td>
+              </tr>';
+
+            }else{
+
+              $vendas = new Vendas;
+              $cont = 1;
+              
+
+              foreach ($_SESSION['itens'] as $produtos => $quantidade) {
+
+                $nomeProduto = $vendas->itemNome($produtos);
+                
+                echo '<tr>
+                <td>'. $cont .'</td>
+                <td>'. $produtos .'</td>
+                <td>'. $nomeProduto .'</td>
+                <td>'. $quantidade .'</td>
+                <td>
+                <input type="hidden" id="idItem" name="idItem['.$produtos.']" value="'.$produtos.'" /> 
+                <input type="hidden" id="qtd" name="qtd['.$produtos.']" value="'.$quantidade.'" />
+                <a title="Remover item '. $nomeProduto .' código '. $produtos .'." href="../../App/Database/remover.php?remover=carrinho&id='.$produtos.'"><i class="fa fa-trash text-danger"></i></a>
+                </td>
+                </tr>';
+                $cont = $cont + 1;
+              }
+              
+            } 
+            ?>
+          </tbody>                  
+        </table>
+     
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+  <!-- Tabela de produtos -->
+
                    <input type="hidden" name="iduser" value="'.$idUsuario.'">
                 <!-- /.box-body -->
 
                 <div class="box-footer">
                   <button type="submit" name="comprar" class="btn btn-primary" value="Cadastrar">Comprar</button>
-                  <a class="btn btn-danger" href="../../views/prod">Cancelar</a>
+                  <a class="btn btn-danger" href="../../views/vendas/">Cancelar</a>
                 </div>
               </form>
 
 <?php
-          if(!empty($_SESSION['msg'])){
-            echo ' <div class="col-xs-12 col-md-12 text-success">'. $_SESSION['msg'].'</div>';
-            unset($_SESSION['msg']);
-          }
+          
 
         echo'
           </div>
