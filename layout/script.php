@@ -60,6 +60,40 @@ $head = '<!DOCTYPE html>
   }); 
   </script>
   
+<!-- Lista Cliente CPF -->
+
+<script type="text/javascript">
+ 
+ $(document).ready(function(){  
+      $(\'#cpfCliente\').keyup(function(){  
+           var query = $(this).val();  
+           if(query != "")  
+           {  
+                $.ajax({  
+                     url:"'.$url.'../App/Database/search.php",  
+                     method:"POST",  
+                     data:{query:query},  
+                     success:function(data)  
+                     {  
+                          
+                          $(\'#Listdata\').fadeIn();  
+                          $(\'#Listdata\').html(data);  
+                     }  
+                });  
+           }  
+      });  
+
+
+      $(\'#Listdata\').on("click","li", function(){  
+           $(\'#cpfCliente\').val($(this).text());  
+           $(\'#Listdata\').fadeOut();
+           <!-- console.log(event.target);-->
+      });
+  });  
+ </script>
+
+ <!-- FIM Lista Cliente CPF --> 
+	
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn\'t work if you view the page via file:// -->

@@ -133,4 +133,59 @@ class Cliente extends Connect
                 return $idCliente = $row['idCliente'];
             }
     }
+
+	function search($value){
+
+        if(isset($value))  
+        {  
+          //$output = '';  
+          $query = "SELECT * FROM `cliente` WHERE `cpfCliente` LIKE '".$value."%' OR `NomeCliente` LIKE '".$value."%' LIMIT 5";  
+          $result = mysqli_query($this->SQL, $query); 
+
+          if(mysqli_num_rows($result) > 0)  
+          {  
+
+           while($row = mysqli_fetch_array($result))  
+           {  
+              
+            $output[] = $row; 
+          } 
+
+          return array('data' => $output);
+
+        }else{
+
+          return 0;
+        }  
+
+      }
+
+    }//------
+
+    function searchdata($value){
+      
+      $value = explode(' ', $value);
+      $valor = str_replace("." , "" , $value[0] ); // Primeiro tira os pontos
+      $valor = str_replace("-" , "" , $valor); // Depois tira o taço
+      $value = $valor;
+
+      if(isset($value))  
+      {  
+        //$output = '';  
+        $query = "SELECT * FROM `cliente` WHERE `cpfCliente` = '$value'";  
+        $result = mysqli_query($this->SQL, $query);  
+        if(mysqli_num_rows($result) > 0)  
+        {  
+
+          if($row = mysqli_fetch_array($result))  
+          {  
+            $output[] = $row; 
+          }  
+          return array('data' => $output); 
+        }else{
+          return $value;
+        } 
+      }  
+    }
+    //-------------------
 }

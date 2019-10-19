@@ -2,6 +2,7 @@
 require_once '../../App/auth.php';
 require_once '../../layout/script.php';
 require_once '../../App/Models/vendas.class.php';
+require_once '../../App/Models/cliente.class.php';
 
 echo $head;
 echo $header;
@@ -30,7 +31,56 @@ echo '<div class="content-wrapper">
             <!-- /.box-header -->
             <div class="box-body">';
 ?>
-            <form id="form2" action="../../App/Database/insertVendas.php" method="POST">
+
+<!-- Cliente list PHP -->
+  <?php  
+
+          if(isset($_POST['CPF'])){ 
+
+            $cliente = new Cliente;
+            $resps = $cliente->searchdata($_POST["CPF"]);  
+            
+              if($resps > 0 && $_POST['CPF'] != NULL){
+               
+                foreach ($resps['data'] as $resp) { 
+
+                 $_SESSION['CPF'] = $resp['cpfCliente'];
+                 $_SESSION['Cliente'] = $resp['NomeCliente'];
+                 $_SESSION['Email'] = $resp['EmailCliente'];
+                 $_SESSION['cart'] = MD5('@?#'.$resp['cpfCliente'].'@'.date("d-m-Y H:i:s"));
+                 
+                }
+                
+              }
+          
+            unset($_POST['CPF']);
+          }
+
+  ?> 
+<!-- Cliente list PHP -->
+
+
+ <!-- Cliente list -->
+  <div class="row">
+
+          <form id="form1" action="index.php" method="post">
+            <div class="box-body">
+            <div class="col-lg-6">
+              <div class="input-group">
+                <input type="text" class="form-control" id="cpfCliente" name="CPF" placeholder="Pesquisar CPF" autocomplete="off">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                </span>
+              </div><!-- /input-group -->
+              <div id="Listdata"></div>
+            </div><!-- /.col-lg-6 -->
+          </div>
+          </form> 
+ </div>       
+<!-- Cliente list FIM -->
+       
+
+     <form id="form2" action="../../App/Database/insertVendas.php" method="POST">
               <div class="box-body">
 
               <div class="form-group">
@@ -42,19 +92,20 @@ echo '<div class="content-wrapper">
                 <input type="text" class="form-control" name="quant">
               </div>
 
-               
+               <!--Aula 22 -->
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nome Cliente</label>
-                    <input type="text" name="nomeCliente" class="form-control" id="exampleInputEmail1" placeholder="Nome Cliente">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">E-mail</label>
-                    <input type="text" name="emailCliente" class="form-control" id="exampleInputEmail1" placeholder="E-mail">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">CPF</label>
-                    <input type="number" name="cpfcliente" class="form-control" id="exampleInputEmail1" placeholder="CPF">
-                  </div>
+                  <label for="exampleInputEmail1">Nome Cliente</label>
+                  <input type="text" name="nomeCliente" class="form-control" id="exampleInputnome1" placeholder="Nome Cliente" value="<?php if(isset($_SESSION['Cliente'])){ echo $_SESSION['Cliente']; } ?>"/>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">E-mail</label>
+                  <input type="text" name="emailCliente" class="form-control" id="exampleInputEmail1" placeholder="E-mail" value="<?php if(isset($_SESSION['Email'])){ echo $_SESSION['Email']; } ?>" />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">CPF</label>
+                  <input type="number" name="cpfcliente" class="form-control" id="exampleInputcpf1" placeholder="CPF" value="<?php if(isset($_SESSION['CPF'])){ echo $_SESSION['CPF']; } ?>" />
+                </div>
+		<!--Aula 22 -->
                   
                   
                   
