@@ -46,10 +46,10 @@ class Vendas extends Connect
     }
   }
 
-	public function itensVendidos($iditem, $quant, $cliente, $email, $cpfcliente, $idUsuario, $perm)
+	public function itensVendidos($iditem, $quant, $cliente, $email, $cpfcliente, $cart, $idUsuario, $perm)
 	{
 
-    	$cpfcliente = Connect::limpaCPF_CNPJ($cpfcliente);
+    	$cpfcliente = intval(Connect::limpaCPF_CNPJ($cpfcliente));
 
         if($perm != 2){
           echo "Você não tem permissão!";
@@ -89,31 +89,44 @@ class Vendas extends Connect
                         }
                         
                         
-                        $this->query = "INSERT INTO `vendas`(`idvendas`, `quantitens`, `valor`, `iditem`, `cliente_idCliente`, `idusuario`) VALUES (NULL, '$quant', '$valor', '$iditem', '$idCliente', '$idUsuario')";
+                        $this->query = "INSERT INTO `vendas`(`idvendas`, `quantitens`, `valor`, `iditem`, `cart`, `cliente_idCliente`, `idusuario`) VALUES (NULL, '$quant', '$valor', '$iditem', '$cart', '$idCliente', '$idUsuario')";
                         if($this->result = mysqli_query($this->SQL, $this->query) or die (mysqli_error($this->SQL))){
 
 
         				$this->query = "UPDATE `itens` SET `QuantItensVend` = '$quantotal' WHERE `idItens`= '$iditem'";
         				if($this->result = mysqli_query($this->SQL, $this->query) or die (mysqli_error($this->SQL))){
-	unset($_SESSION['itens']); //limpa itens da lista
-        					$_SESSION['msg'] = 'Venda efetuada!'; 
-                            header('Location: ../../views/vendas/');
+
+        					unset($_SESSION['itens']); //limpa itens da lista
+                            
+                            $_SESSION['notavd'] = $cart;
+                            $_SESSION['msg'] = '<div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Sucesso!</strong> Venda efetuada!</div>';
+
                         }
 
         				}else{
-        					$_SESSION['msg'] = 'Erro - Venda não efetuada!';
-                            header('Location: ../../views/vendas/'); 
+        					 $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible">
+                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                         <strong>Erro!</strong> Venda não efetuada! </div>';
+                        
+                        header('Location: ../../views/vendas/');
+                        exit();  
         				}
 
         			}else{
 
         				$estoque = $row['QuantItens'] - $row['QuantItensVend'];
-        				$retorno = 'Quantidade maior do que em estoque! </br> Quantidade em estoque disponivel: '.$estoque;
-
-                        $_SESSION['msg'] = $retorno;
-                        header('Location: ../../views/vendas/');
+                      
+                      $_SESSION['msg'] =  '<div class="alert alert-warning alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <strong>Ops!</strong> Quantidade maior do que em estoque! </br> Quantidade em estoque: <b>'.$estoque . '</b></div>';
+                      header('Location: ../../views/vendas/');
+                      exit();
 
         			}
+
+                    header('Location: ../../views/vendas/notavd.php');
 
 
         		}
@@ -122,7 +135,8 @@ class Vendas extends Connect
         		//------------------
 
         }else{
-        	header('Location: ../../views/vendas/index.php?alert=0');
+            $_SESSION['alert'] = 0;
+        	header('Location: ../../views/vendas/');
         }
 
 
@@ -158,5 +172,33 @@ class Vendas extends Connect
     
     return $resp;
   }//--itemNome
+
+public function notavd($cart){
+
+    $query = "SELECT * FROM `vendas` WHERE `cart` = '$cart' ";
+
+    if($this->result = mysqli_query($this->SQL, $query)  or die (mysqli_error($this->SQL))){
+
+      while($row = mysqli_fetch_array($this->result)){
+       $out[] = $row;
+     }
+     
+   }
+
+   return $out;
+ }//--notavd
+
+ public function dadosItem($idItem){
+  
+  $query = "SELECT * FROM `fabricante`, `produtos`, `itens` WHERE `idItens` = '$idItem' AND `Produto_CodRefProduto` = `CodRefProduto` AND `Fabricante_idFabricante` = `idFabricante`";
+
+  if($this->result = mysqli_query($this->SQL, $query)  or die (mysqli_error($this->SQL))){
+
+    $row = mysqli_fetch_array($this->result);
+
+    return $row;
+  }
+} //---dadosItem
+
     
 }//Class

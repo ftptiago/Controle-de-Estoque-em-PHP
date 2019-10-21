@@ -41,7 +41,7 @@ foreach ($_POST['idItem'] as $key => $error) {
     $quant = $_POST['qtd'][$key];
 
     $vendas = new Vendas;
-    $vendas->itensVendidos($id, $quant, $cliente, $email, $cpfCliente, $idUsuario, $perm);
+    $vendas->itensVendidos($id, $quant, $cliente, $email, $cpfCliente, $cart, $idUsuario, $perm);
 
 }     
 

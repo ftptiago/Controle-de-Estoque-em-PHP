@@ -186,6 +186,17 @@ class Cliente extends Connect
           return $value;
         } 
       }  
+    }//----searchdata------
+    
+    public function dadoscliente($idCliente){
+
+        $this->client = "SELECT * FROM `cliente` WHERE `idCliente` = '$idCliente'";
+
+            if($this->resultcliente = mysqli_query($this->SQL, $this->client)  or die (mysqli_error($this->SQL))){
+
+                $row = mysqli_fetch_array($this->resultcliente);
+                return $row;
+            }
     }
-    //-------------------
+
 }
