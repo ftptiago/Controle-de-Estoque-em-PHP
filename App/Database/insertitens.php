@@ -16,12 +16,33 @@ $iduser = $_POST['iduser'];
 
 if($iduser == $idUsuario && $QuantItens != NULL){
 
+	if (!file_exists($_FILES['arquivo']['name'])) {		
+			
+			$pt_file =  '../../views/dist/img/'.$_FILES['arquivo']['name'];
+			
+			if ($pt_file != '../../views/dist/img/'){	
+				
+				$destino =  '../../views/dist/img/'.$_FILES['arquivo']['name'];				
+				$arquivo_tmp = $_FILES['arquivo']['tmp_name'];
+				move_uploaded_file($arquivo_tmp, $destino);
+				chmod ($destino, 0644);	
+
+				$nomeimagem =  'dist/img/'.$_FILES['arquivo']['name'];
+				
+			}elseif($_POST['valor'] != NULL){
+				
+				$nomeimagem = $_POST['valor'];
+					
+			
+				}
+			}
+	
 if(isset($_POST['idItens'])){
 
 	$idItens = $_POST['idItens'];
-	$itens->updateItens($idItens, $QuantItens, $ValCompItens, $ValVendItens, $DataCompraItens, $DataVenci_Itens, $Produto_CodRefProduto, $Fabricante_idFabricante, $idUsuario);
+	$itens->updateItens($idItens, $nomeimagem, $QuantItens, $ValCompItens, $ValVendItens, $DataCompraItens, $DataVenci_Itens, $Produto_CodRefProduto, $Fabricante_idFabricante, $idUsuario);
 }else{
-$itens->InsertItens($QuantItens, $ValCompItens, $ValVendItens, $DataCompraItens, $DataVenci_Itens, $Produto_CodRefProduto, $Fabricante_idFabricante, $idUsuario);
+$itens->InsertItens($nomeimagem, $QuantItens, $ValCompItens, $ValVendItens, $DataCompraItens, $DataVenci_Itens, $Produto_CodRefProduto, $Fabricante_idFabricante, $idUsuario);
 }
 
 

@@ -7,6 +7,7 @@ require_once '../../App/Models/cliente.class.php';
 echo $head;
 echo $header;
 echo $aside;
+
 echo '<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
     <section class="content-header">
@@ -33,7 +34,7 @@ echo '<div class="content-wrapper">
 
             if(!empty($_SESSION['msg'])){
             echo ' <div class="col-xs-12 col-md-12 text-success">'. $_SESSION['msg'].'</div>';
-            unset($_SESSION['msg'], $_SESSION['CPF'], $_SESSION['Cliente'], $_SESSION['Email'], $_SESSION['cart']);
+            unset($_SESSION['msg']);
           }
 ?>
 
@@ -208,7 +209,7 @@ echo '</section>';
 	  
 
 echo '</div>';
-
+unset($_SESSION['notavd']);
 echo  $footer;
 echo $javascript;
 ?>

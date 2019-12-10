@@ -62,6 +62,7 @@
     <thead class="thead-inverse">
       <tr>
         <th>Ativo</th>
+        <th>Image</th>
         <th>Nome Produto</th>
         <th>Fabricante</th>
         <th>Quant. Estoque</th>
@@ -93,12 +94,18 @@
           echo '<form class="label" name="ativ'.$id.'" action="../../App/Database/action.php" method="post">
           <input type="hidden" name="id" id="id" value="'.$id.'">
           <input type="hidden" name="status" id="status" value="'.$Ativo.'">
+          
           <input type="hidden" name="tabela" id="tabela" value="itens">  
           <input type="checkbox" id="status" name="status" ';
           if($Ativo == 1){ echo 'checked'; } 
           echo ' value="'.$Ativo.'" onclick="this.form.submit();"></form>
-          </th>
-          <td>'.$row['NomeProduto'].'</td>
+          </th><td>
+          ';
+
+           if(!empty($row['Image'])){
+            echo '<img src="../'.$row['Image'].'" width="50" />';
+          }
+          echo '</td><td>'.$row['NomeProduto'].'</td>
           <td>'.$row['NomeFabricante'].'</td>
           <td>'.$row['QuantItens'].'</td>
           <td>'.$row['QuantItensVend'].'</td>
@@ -152,9 +159,9 @@
 
       }
 
-      public function InsertItens($QuantItens, $ValCompItens, $ValVendItens, $DataCompraItens, $DataVenci_Itens, $Produto_CodRefProduto, $Fabricante_idFabricante, $idusuario){
+      public function InsertItens($nomeimagem, $QuantItens, $ValCompItens, $ValVendItens, $DataCompraItens, $DataVenci_Itens, $Produto_CodRefProduto, $Fabricante_idFabricante, $idusuario){
 
-       $this->query = "INSERT INTO `itens`(`idItens`, `QuantItens`, `QuantItensVend`, `ValCompItens`, `ValVendItens`, `DataCompraItens`, `DataVenci_Itens`, `ItensAtivo`,`ItensPublic`, `Produto_CodRefProduto`, `Fabricante_idFabricante`, `Usuario_idUser`) VALUES (NULL, '$QuantItens', 0, '$ValCompItens', '$ValVendItens', '$DataCompraItens', '$DataVenci_Itens', 1, 1, '$Produto_CodRefProduto', '$Fabricante_idFabricante', '$idusuario')";
+       $this->query = "INSERT INTO `itens`(`idItens`,`Image` ,`QuantItens`, `QuantItensVend`, `ValCompItens`, `ValVendItens`, `DataCompraItens`, `DataVenci_Itens`, `ItensAtivo`,`ItensPublic`, `Produto_CodRefProduto`, `Fabricante_idFabricante`, `Usuario_idUser`) VALUES (NULL, '$nomeimagem', '$QuantItens', 0, '$ValCompItens', '$ValVendItens', '$DataCompraItens', '$DataVenci_Itens', 1, 1, '$Produto_CodRefProduto', '$Fabricante_idFabricante', '$idusuario')";
        if($this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){
 
         header('Location: ../../views/itens/index.php?alert=1');
@@ -171,6 +178,7 @@
       if($row = mysqli_fetch_array($this->result)){
 
         $idItens = $row['idItens'];
+        $nomeimagem = $row['Image'];
         $QuantItens = $row['QuantItens'];
         $ValCompItens = $row['ValCompItens'];
         $ValVendItens = $row['ValVendItens'];
@@ -179,21 +187,23 @@
         $Produto_CodRefProduto = $row['Produto_CodRefProduto'];
         $Fabricante_idFabricante = $row['Fabricante_idFabricante'];
 
-        return $resp = array('Itens' => array('idItens' => $idItens,
+        return $resp = array('Itens' => ['idItens' => $idItens,
+          'Image' => $nomeimagem,
           'QuantItens'   => $QuantItens,
           'ValCompItens' => $ValCompItens,
           'ValVendItens' => $ValVendItens,
           'DataCompraItens' => $DataCompraItens,
           'DataVenci_Itens' => $DataVenci_Itens,
           'CodRefProduto' => $Produto_CodRefProduto,
-          'idFabricante' => $Fabricante_idFabricante ), );  
+          'idFabricante' => $Fabricante_idFabricante ] , );  
       }
       
     }
 
-    public function updateItens($idItens, $QuantItens, $ValCompItens, $ValVendItens, $DataCompraItens, $DataVenci_Itens, $Produto_CodRefProduto, $Fabricante_idFabricante, $idusuario)
+    public function updateItens($idItens, $nomeimagem, $QuantItens, $ValCompItens, $ValVendItens, $DataCompraItens, $DataVenci_Itens, $Produto_CodRefProduto, $Fabricante_idFabricante, $idusuario)
     {
-      $this->query = "UPDATE `itens` SET 
+      $this->query = "UPDATE `itens` SET
+      `Image` = '$nomeimagem', 
       `QuantItens`= '$QuantItens',
       `ValCompItens`='$ValCompItens',
       `ValVendItens`='$ValVendItens',

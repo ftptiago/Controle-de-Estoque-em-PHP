@@ -8,7 +8,8 @@ require_once 'connect.php';
 
 class Vendas extends Connect
 {
-	public function itensVerify($iditem, $quant, $perm){
+
+    public function itensVerify($iditem, $quant, $perm){
 
     if($perm < 1 || $perm > 2){
       $_SESSION['msg'] =  'Erro - Você não tem permissão!'; 
@@ -52,7 +53,10 @@ class Vendas extends Connect
     	$cpfcliente = intval(Connect::limpaCPF_CNPJ($cpfcliente));
 
         if($perm != 2){
-          echo "Você não tem permissão!";
+          $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible">
+                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                         <strong>Erro!</strong> Você não tem permissão! </div>'; 
+          header('Location: ../../views/vendas/index.php');
           exit();
         }
 
@@ -152,7 +156,7 @@ class Vendas extends Connect
                 return $idCliente = $row['idCliente'];
             }
     }
-	
+
     //----------itemNome
 
     public function itemNome($idItens){
@@ -173,7 +177,7 @@ class Vendas extends Connect
     return $resp;
   }//--itemNome
 
-public function notavd($cart){
+  public function notavd($cart){
 
     $query = "SELECT * FROM `vendas` WHERE `cart` = '$cart' ";
 

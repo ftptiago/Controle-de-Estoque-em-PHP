@@ -1,6 +1,6 @@
 <?php
 
-$url = 'http://localhost/Controle-de-Estoque-em-PHP/views/';
+$url = 'http://localhost/webestoque/views/';
 
 $head = '<!DOCTYPE html>
 <html>
@@ -37,7 +37,23 @@ $head = '<!DOCTYPE html>
   <link rel="stylesheet" href="'.$url.'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
-  
+
+<!-- Imprimir Venda -->
+
+  <script type="text/javascript">
+    
+    function cont(){
+       var conteudo = document.getElementById(\'print\').innerHTML;
+       tela_impressao = window.open(\'about:blank\');
+       tela_impressao.document.write(conteudo);
+       tela_impressao.window.print();
+       tela_impressao.window.close(); 
+    }
+
+</script>
+
+<!-- Imprimir Venda --> 
+
   <script type="text/javascript">
     $(document).ready(function(){
     $("input[name=\'status[]\']").click(function(){
@@ -59,8 +75,8 @@ $head = '<!DOCTYPE html>
     });
   }); 
   </script>
-  
-<!-- Lista Cliente CPF -->
+
+  <!-- Lista Cliente CPF -->
 
 <script type="text/javascript">
  
@@ -171,7 +187,7 @@ $head = '<!DOCTYPE html>
 
 <!-- Consulta Qtd Vendas -->
 
-	
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn\'t work if you view the page via file:// -->
