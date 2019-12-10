@@ -81,11 +81,11 @@ echo '
                 </div>
 
                 <div class="form-group">
-                <img src="../'.$resp['Itens']['Image'].'" width="50" >
-                  <label for="exampleInputEmail1">Imagem '.$resp['Itens']['Image'].'</label>
+                
+                  <label for="exampleInputEmail1">Imagem</label>
                   <input type="file" name="arquivo" class="form-control">
                 </div>
-                 <input type="hidden" name="valor" value="'.$resp['Itens']['Image'].'">
+                 <input type="hidden" name="valor" value="#">
                            
                  <input type="hidden" name="iduser" value="'.$idUsuario.'">
 
