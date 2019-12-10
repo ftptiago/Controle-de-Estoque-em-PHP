@@ -36,7 +36,7 @@ echo '
             <!-- /.box-header -->
             <!-- form start -->
   
-            <form role="form" action="../../App/Database/insertitens.php" method="POST" autocomplete="off">
+            <form role="form" enctype="multipart/form-data" action="../../App/Database/insertitens.php" method="POST" autocomplete="off">
               <div class="box-body">
               	<div class="form-group">
                   <label for="exampleInputEmail1">Nome do Produto</label>
@@ -80,6 +80,13 @@ echo '
                   <input type="text" name="DataVenci_Itens" class="form-control" id="exampleInputEmail1" placeholder="DataVenci_Itens">
                 </div>
 
+                <div class="form-group">
+                <img src="../'.$resp['Itens']['Image'].'" width="50" >
+                  <label for="exampleInputEmail1">Imagem '.$resp['Itens']['Image'].'</label>
+                  <input type="file" name="arquivo" class="form-control">
+                </div>
+                 <input type="hidden" name="valor" value="'.$resp['Itens']['Image'].'">
+                           
                  <input type="hidden" name="iduser" value="'.$idUsuario.'">
 
 

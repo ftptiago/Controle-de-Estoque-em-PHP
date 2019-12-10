@@ -43,7 +43,7 @@ echo '
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="../../App/Database/insertitens.php" method="POST">
+            <form role="form" enctype="multipart/form-data" action="../../App/Database/insertitens.php" method="POST">
               <div class="box-body">
               	<div class="form-group">
                   <label for="exampleInputEmail1">Nome do Produto</label>
@@ -84,6 +84,13 @@ echo '
                   <label for="exampleInputEmail1">DataVenci_Itens</label>
                   <input type="text" name="DataVenci_Itens" class="form-control" id="exampleInputEmail1" placeholder="DataVenci_Itens" value="'.$resp['Itens']['DataVenci_Itens'].'">
                 </div>
+
+                <div class="form-group">
+                <img src="../'.$resp['Itens']['Image'].'" width="50" >
+                  <label for="exampleInputEmail1">Imagem '.$resp['Itens']['Image'].'</label>
+                  <input type="file" name="arquivo" class="form-control">
+                </div>
+                 <input type="hidden" name="valor" value="'.$resp['Itens']['Image'].'">
 
                  <input type="hidden" name="iduser" value="'.$idUsuario.'">
                  <input type="hidden" name="idItens" value="'.$resp['Itens']['idItens'].'">
