@@ -161,7 +161,7 @@ class Vendas extends Connect
 
     public function itemNome($idItens){
 
-    $query = "SELECT * FROM `produtos` WHERE `CodRefProduto` IN (SELECT `Produto_CodRefProduto` FROM `itens` WHERE `idItens` = '$idItens')";
+    $query = "SELECT * FROM `produtos` WHERE `CodRefProduto` IN (SELECT `Produto_CodRefProduto` FROM `itens` WHERE `idItens` = '$idItens' AND `ItensAtivo` = 1 AND `ItensPublic` = 1)";
 
     $result = mysqli_query($this->SQL, $query)  or die (mysqli_error($this->SQL));
                 
