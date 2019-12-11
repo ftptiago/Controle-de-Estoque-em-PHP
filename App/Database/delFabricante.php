@@ -6,7 +6,7 @@ if(isset($_POST['update']) == 'Cadastrar'){
 
 $idFabricante = $_POST['idFabricante'];
 
-$fabricante->DelFabricante($idFabricante);
+$fabricante->DelFabricante($idFabricante, $perm);
 
 }else{
 	header('Location: ../../views/fabricante/index.php');

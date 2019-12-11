@@ -215,7 +215,7 @@
           exit();
         }
 
-        $this->query = "SELECT * FROM `Fabricante` WHERE `idFabricante` = '$idFabricante'";
+        $this->query = "SELECT * FROM `fabricante` WHERE `idFabricante` = '$idFabricante'";
         $this->result = mysqli_query($this->SQL, $this->query);
         if($row = mysqli_fetch_array($this->result)){
 
