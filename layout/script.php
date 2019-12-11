@@ -1,6 +1,6 @@
 <?php
 
-$url = 'http://localhost/webestoque/views/';
+$url = 'http://localhost/Controle-de-Estoque-em-PHP/views/';
 
 $head = '<!DOCTYPE html>
 <html>
