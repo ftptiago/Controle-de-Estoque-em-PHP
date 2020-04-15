@@ -141,16 +141,28 @@ echo '<div class="content-wrapper">
           <tbody id="listable">
             
             <?php          
+	/*
+	Existe uma atualização no PHP 7.2 que modifica o uso do "count" if(count($_SESSION['itens']) == 0), 
+	no caso de você esta utilizando está versão ou superior,
+	basta subistituir por "isset" ficando 
+	====================================================
+		if(isset($_SESSION['itens']) == 0)... 
+	====================================================
+	ou modificar o código ficando assim
+	====================================================
+		$pkCount = (is_array($_SESSION['itens']) ? count($_SESSION['itens']) : 0);
+		if ($pkCount == 0) {...
+	====================================================
+	*/
+	$pkCount = (is_array($_SESSION['itens']) ? count($_SESSION['itens']) : 0);
+	if ($pkCount == 0) { // Alterado conforme descrito
+		echo '<tr>
+              		<td colspan="5">
+              		<b>Carrinho Vazio</b>
+              		</td>
+              	</tr>';
 
-
-            if(count($_SESSION['itens']) == 0){
-              echo '<tr>
-              <td colspan="5">
-              <b>Carrinho Vazio</b>
-              </td>
-              </tr>';
-
-            }else{
+        }else{
 
               $vendas = new Vendas;
               $cont = 1;
