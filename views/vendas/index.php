@@ -170,17 +170,16 @@ echo '<div class="content-wrapper">
 
               foreach ($_SESSION['itens'] as $produtos => $quantidade) {
 
-                $nomeProduto = $vendas->itemNome($produtos);
+                
                 
                 echo '<tr>
                 <td>'. $cont .'</td>
-                <td>'. $produtos .'</td>
-                <td>'. $nomeProduto .'</td>
+                <td>'. $produtos .'</td>                
                 <td>'. $quantidade .'</td>
                 <td>
                 <input type="hidden" id="idItem" name="idItem['.$produtos.']" value="'.$produtos.'" /> 
                 <input type="hidden" id="qtd" name="qtd['.$produtos.']" value="'.$quantidade.'" />
-                <a title="Remover item '. $nomeProduto .' código '. $produtos .'." href="../../App/Database/remover.php?remover=carrinho&id='.$produtos.'"><i class="fa fa-trash text-danger"></i></a>
+                <a title="Remover item código '. $produtos .'." href="../../App/Database/remover.php?remover=carrinho&id='.$produtos.'"><i class="fa fa-trash text-danger"></i></a>
                 </td>
                 </tr>';
                 $cont = $cont + 1;
