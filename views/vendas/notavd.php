@@ -85,7 +85,7 @@ if(isset($_SESSION['notavd']) != NULL){
                         <tr>
                           <td colspan="5">
                             Cliente: <?php echo $dados['NomeCliente']; ?>
-                            </br>CPF: <?php echo connect::format_CPF($dados['cpfCliente']); ?>
+                            </br>CPF: <?php echo $connect->format_CPF($dados['cpfCliente']); ?>
                           </td>
                         </tr>
                           
@@ -113,7 +113,7 @@ if(isset($_SESSION['notavd']) != NULL){
                               echo '<td>' . $NomeFabricante .   '</td>';
                               echo '<td>' . $key["quantitens"] .'</td>';
                               echo '<td>'; 
-                              echo connect::format_moeda($key['valor']);
+                              echo $connect->format_moeda($key['valor']);
                               echo '</td>';
                               echo "</tr>";
                               $soma = $soma + $key["valor"];
@@ -122,7 +122,7 @@ if(isset($_SESSION['notavd']) != NULL){
                             ?>
                             <tr>
                               <td colspan="4">Data: <?php echo date('d M Y H:i:s'); ?> </td>
-                              <td>Total: <?php echo connect::format_moeda($soma); ?></td>
+                              <td>Total: <?php echo $connect->format_moeda($soma); ?></td>
                             </tr>
                           </table>
                         </div><!-- table-responsive -->
