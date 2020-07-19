@@ -149,11 +149,11 @@ echo '<div class="content-wrapper">
 	====================================================
 	ou modificar o código ficando assim
 	====================================================
-		$pkCount = (is_array($_SESSION['itens']) ? count($_SESSION['itens']) : 0);
+		$pkCount = (isset($_SESSION['itens']) ? count($_SESSION['itens']) : 0);
 		if ($pkCount == 0) {...
 	====================================================
 	*/
-	$pkCount = (is_array($_SESSION['itens']) ? count($_SESSION['itens']) : 0);
+	$pkCount = (isset($_SESSION['itens']) ? count($_SESSION['itens']) : 0);
 	if ($pkCount == 0) { // Alterado conforme descrito
 		echo '<tr>
               		<td colspan="5">
