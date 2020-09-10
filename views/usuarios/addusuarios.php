@@ -41,12 +41,12 @@ if($perm == 1){
             <form role="form" enctype="multipart/form-data" action="../../App/Database/insertuser.php" method="POST">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Nome do Usuário</label>
+                  <label for="exampleInputEmail1">Nome</label>
                   <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Nome do usuário">
                 </div>
 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">E-mail do Usuário</label>
+                  <label for="exampleInputEmail1">E-mail</label>
                   <input type="text" name="email" class="form-control" id="exampleInputEmail1" placeholder="E-mail do usuário">
                 </div>
 
@@ -59,7 +59,7 @@ if($perm == 1){
 
              
                 <div class="form-group">
-                  <label for="exampleInputEmail1">digite uma senha</label>
+                  <label for="exampleInputEmail1">Foto Perfil</label>
                <input id="arquivo" name="arquivo" type="file" class="form-control" id="exampleInputEmail1" placeholder="Imagem">
                 </div>
                 <div class="form-group">
@@ -73,8 +73,6 @@ if($perm == 1){
                 <button type="submit" name="update" class="btn btn-primary" value="Cadastrar">Cadastrar</button>
                 <a class="btn btn-danger" href="../../views/prod">Cancelar</a>
               </div>
-
-
             </form>
             
 ';}else{
@@ -88,7 +86,6 @@ if($perm == 1){
             ';
 }
 echo '
-
           </div>
           <!-- /.box -->
           </div>
