@@ -15,20 +15,13 @@
    			$this->query = "SELECT * FROM `usuario`";
    			$this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL));
 
-   			while($this->row = mysqli_fetch_array($this->result)){
-   				echo '<li>';
-   				echo $this->row['Username'];
-   				echo ' | Tipo de permissão:  ';
-   				if($this->row['Permissao'] == 1){ echo 'Administrador'; }else{ echo 'Vendedor';}
-   				
-   				echo '</li>';
+   			while($row[] = mysqli_fetch_array($this->result));
+        return json_encode($row);
+              
 
-   			}
-
-
-   		}else{
+      }else{
    			echo "Você não tem Permissao de acesso a este conteúdo!";
-   		}   		
+   		}       
    	}
 
    	public function InsertUser($username, $email, $password, $pt_file, $perm)
@@ -45,6 +38,44 @@
               }
 
    	}
+
+      public function editUsuario($id){
+
+      $query = "SELECT * FROM `usuario` WHERE `idUser` = '$id'";
+      $result = mysqli_query($this->SQL, $query) or die(mysqli_error($this->SQL));
+
+      if($row = mysqli_fetch_array($result)){
+
+        return array('Usuario' => $row['Username'], 'E-mail' => $row['Email'], 'Permissao' => $row['Permissao'], 'Imagem' => $row['imagem']);
+
+      }
+
+
+    }
+    public function UpdateUser($idUser, $username, $email, $nomeimagem, $permissao = NULL){
+
+      if($permissao != NULL){
+          $Permissao = ", Permissao = '$permissao'";
+      }else{
+        $Permissao = '';
+      }
+      $username = mysqli_real_escape_string($this->SQL, $username);
+      $email = mysqli_real_escape_string($this->SQL, $email);
+
+      $this->query = "UPDATE `usuario` SET `Username`='$username',`Email`='$email',`imagem`='$nomeimagem' $Permissao WHERE `idUser`= '$idUser'";
+      
+        $this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL));
+        mysqli_insert_id($this->result);
+        if($this->result){
+           header('Location: ../../views/usuarios/index.php?alert=1');
+        
+      }else{
+                header('Location: ../../views/usuarios/index.php?alert=0');
+      }
+
+    }
+
+    
 
    }
 

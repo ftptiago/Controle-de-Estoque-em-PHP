@@ -58,7 +58,7 @@
 
    		if($this->result){
 
-        echo '<table class="table">
+        echo '<table id="example1" class="table">
     <thead class="thead-inverse">
       <tr>
         <th>Ativo</th>

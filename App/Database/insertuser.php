@@ -4,13 +4,10 @@ require_once '../Models/usuario.class.php';
 
 $username  = $_POST['username'];
 $email = $_POST['email'];
-$password = md5($_POST['password']);
+$idUser = $_POST['idUser'];
 $permissao = $_POST['permissao'];
 
-
-
-
-    if ($username != NULL && $password != NULL && $perm == 1) { 
+    if ($username != NULL && $perm == 1 || $idUser == $idUsuario) { 
         
         if (!file_exists($_FILES['arquivo']['name'])) {		
 			
@@ -27,11 +24,23 @@ $permissao = $_POST['permissao'];
 				
 			}elseif($_POST['valor'] != NULL){
 				
-				$arq = explode($_POST['valor']);
-				$nomeimagem = $arq[1];	
+				$nomeimagem = $_POST['valor'];				
 			
+				}else{
+				$nomeimagem = 'dist/img/avatar.png';
 				}
 			}
     
-        $usuario->InsertUser($username, $email, $password, $nomeimagem, $permissao);
+if(isset($idUser) != NULL){
+	if($perm == 1){
+		$usuario->UpdateUser($idUser, $username, $email, $nomeimagem, $permissao);
+	}else{
+		$usuario->UpdateUser($idUser, $username, $email, $nomeimagem);
+	}
+}else{
+	$password = md5($_POST['password']);
+    $usuario->InsertUser($username, $email, $password, $nomeimagem, $permissao);
+
+}
+    
 }

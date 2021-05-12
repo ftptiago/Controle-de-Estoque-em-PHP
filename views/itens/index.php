@@ -31,15 +31,7 @@ echo '<div class="content-wrapper">
 
               <h3 class="box-title">Lista de Itens</h3>
 
-              <div class="box-tools pull-right">
-                <ul class="pagination pagination-sm inline">
-                  <li><a href="#">&laquo;</a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">&raquo;</a></li>
-                </ul>
-              </div>
+              
             </div>
             <!-- /.box-header -->
             <div class="box-body">';
