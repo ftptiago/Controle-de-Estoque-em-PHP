@@ -7,7 +7,7 @@ echo $header;
 echo $aside;
 echo '<div class="content-wrapper">';
 
-echo 'Usuário: '.$usuario.'</br>Perfil: ';
+echo 'Usuário: '.$username.'</br>Perfil: ';
 echo $perm;
 
 echo '</div>';

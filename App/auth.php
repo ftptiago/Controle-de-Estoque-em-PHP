@@ -7,7 +7,7 @@ if(!isset($_SESSION["idUsuario"]) || !isset($_SESSION["usuario"])){
 }else{
 
 	$idUsuario = $_SESSION["idUsuario"]; 
-	$usuario   = $_SESSION["usuario"];
+	$username   = $_SESSION["usuario"];
 	$perm	   = $_SESSION["perm"];
 	$foto      = $_SESSION["foto"];
 

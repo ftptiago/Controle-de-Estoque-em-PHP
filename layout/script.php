@@ -417,7 +417,7 @@ $header = '<header class="main-header">
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="'.$url.''.$foto.'" class="user-image" alt="User Image">
-              <span class="hidden-xs">'.$usuario.'</span>
+              <span class="hidden-xs">'.$username.'</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -425,7 +425,7 @@ $header = '<header class="main-header">
                 <img src="'.$url.''.$foto.'" class="img-circle" alt="User Image">
 
                 <p>
-                  '.$usuario.' - Web Developer
+                  '.$username .' - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -447,7 +447,7 @@ $header = '<header class="main-header">
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="'.$url.'usuarios/profile.php" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="'.$url.'destroy.php" class="btn btn-default btn-flat">Sign out</a>
@@ -475,7 +475,7 @@ $header = '<header class="main-header">
          
         </div>
         <div class="pull-left info">
-          <p>'.$usuario.'</p>
+          <p>'.$username .'</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 
         </div>
