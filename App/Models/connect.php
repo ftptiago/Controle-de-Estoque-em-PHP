@@ -8,7 +8,7 @@
  	
  	var $localhost = "localhost";
  	var $root = "root";
- 	var $passwd = "1234";
+ 	var $passwd = "";
  	var $database = "controlestoque";
  	var $SQL;
  	
