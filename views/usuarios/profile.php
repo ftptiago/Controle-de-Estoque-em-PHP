@@ -48,7 +48,48 @@ echo '<div class="content-wrapper">
               </ul>
 
               <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
-              <a href="#" class="btn btn-primary btn-block"><b>Alterar senha</b></a>
+              
+
+              <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-default">
+                Alterar senha
+              </button>
+
+              <div class="modal fade" id="modal-default" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Alterar Senha</h4>
+              </div>
+              <form action="../../App/Database/trocaSenha.php" method="post">
+              <div class="modal-body">
+              <div class="form-group">
+              <label for="passAtual">Senha Atual</label> 
+                <input type="password" class="form-control" id="passAtual" name="passAtual">
+                </div>
+                <div class="form-group">
+                <label for="password">Nova Senha</label> 
+                <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <div class="form-group">
+                <label for="rpassword">Repetir nova senha</label> 
+                <input type="password" class="form-control" id="rpassword" name="rpassword">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+              </form>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+             
+                    
             </div>
             <!-- /.box-body -->
           </div>
@@ -382,6 +423,6 @@ echo '<div class="content-wrapper">
 
 echo '</div>';
 
-echo  $footer;
+echo $footer;
 echo $javascript;
 ?>

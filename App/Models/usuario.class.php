@@ -73,9 +73,34 @@
                 header('Location: ../../views/usuarios/index.php?alert=0');
       }
 
-    }
+    }   
 
-    
+    public function trocaSenha($passAtual, $password, $idUsuario){
+
+      $query = "SELECT * FROM `usuario` WHERE `idUser` = '$idUsuario'";
+      $result = mysqli_query($this->SQL, $query) or die(mysqli_error($this->SQL));
+
+      if($row = mysqli_fetch_array($result)){
+        $passAtual = md5($passAtual);
+
+        if(!strcmp($passAtual, $row['Password'])){
+
+          $id = $row['idUser'];
+
+          $password = md5($password);
+
+          $up = "UPDATE `usuario` SET `Password` = '$password' WHERE `idUser` = '$id'";
+          mysqli_query($this->SQL, $up) or die(mysqli_error($this->SQL));
+
+          return 1;
+
+        }
+        return 0;
+
+      }
+      return 0;
+
+    }
 
    }
 

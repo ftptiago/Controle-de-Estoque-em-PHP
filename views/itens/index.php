@@ -25,7 +25,7 @@ echo '<div class="content-wrapper">
     echo '
       <!-- Small boxes (Stat box) -->
       <div class="row">
-      	<div class="box box-primary">
+      	<div class="box">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
 
@@ -69,10 +69,7 @@ echo '<div class="content-wrapper">
 	 
 ';
 echo '</div>';
-echo '</section>';
-      
-       
-	  
+echo '</section>';          	  
 
 echo '</div>';
 

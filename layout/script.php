@@ -34,7 +34,7 @@ $head = '<!DOCTYPE html>
   <!-- Daterange picker -->
   <link rel="stylesheet" href="'.$url.'plugins/daterangepicker/daterangepicker.css">
 
-  <link rel="stylesheet" href="'.$url.'plugins/datatables/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="'.$url.'plugins/datatables/dataTables.bootstrap.css">
   
   
   <!-- bootstrap wysihtml5 - text editor -->
@@ -85,7 +85,7 @@ $head = '<!DOCTYPE html>
 <script type="text/javascript">
  
  $(document).ready(function(){  
-      $(\'#cpfCliente\').keyup(function(){  
+      $("#cpfCliente").keyup(function(){  
            var query = $(this).val();  
            if(query != "")  
            {  
@@ -200,8 +200,8 @@ $head = '<!DOCTYPE html>
 
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">';
+<body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
+<div class="wrapper" style="height: auto; min-height: 100%;">';
 
 $header = '<header class="main-header">
     <!-- Logo -->
@@ -234,7 +234,7 @@ $header = '<header class="main-header">
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="'.$url.'dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -247,7 +247,7 @@ $header = '<header class="main-header">
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="'.$url.'dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         AdminLTE Design Team
@@ -259,7 +259,7 @@ $header = '<header class="main-header">
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="'.$url.'dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -271,7 +271,7 @@ $header = '<header class="main-header">
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="'.$url.'dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Sales Department
@@ -283,7 +283,7 @@ $header = '<header class="main-header">
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="'.$url.'dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Reviewers
@@ -518,6 +518,20 @@ $header = '<header class="main-header">
             <li><a href="'.$url.'itens/"><i class="fa fa-circle-o"></i>Itens</a></li>
              <li><a href="'.$url.'itens/totalitens.php"><i class="fa fa-circle-o"></i>Total Itens</a></li>
             <li><a href="'.$url.'itens/additens.php"><i class="fa fa-circle-o"></i>Add Itens</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i>
+            <span>Relatorios</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="'.$url.'relatorios/"><i class="fa fa-circle-o"></i>Relatorios</a></li>
+            
           </ul>
         </li>
 

@@ -91,13 +91,16 @@
           $id = $row['idItens'];
           $Ativo = $row['ItensAtivo'];
 
-          echo '<form class="label" name="ativ'.$id.'" action="../../App/Database/action.php" method="post">
-          <input type="hidden" name="id" id="id" value="'.$id.'">
-          <input type="hidden" name="status" id="status" value="'.$Ativo.'">
-          
-          <input type="hidden" name="tabela" id="tabela" value="itens">  
-          <input type="checkbox" id="status" name="status" ';
-          if($Ativo == 1){ echo 'checked'; } 
+          echo '<form class="label" name="ativ'.$id.'" enctype="multipart/form-data"  action="../../App/Database/action.php" method="post">
+          <input type="hidden" name="id" id="id_action'.$id.'" value="'.$id.'">          
+          <input type="hidden" id="status'.$id.'" name="status" 
+          value="'.$Ativo.'">
+          <input type="hidden" name="tabela" id="tabela'.$id.'" value="itens">  
+
+          <input type="checkbox" id="checked'.$id.'" name="checked['.$id.']" ';
+          if($Ativo == 1){ 
+            echo "checked";             
+          }
           echo ' value="'.$Ativo.'" onclick="this.form.submit();"></form>
           </th><td>
           ';
@@ -139,7 +142,7 @@
           <div class="modal-body">
             Código: '.$row['idItens'].' - '.$row['NomeProduto'].' - '.$row['NomeFabricante'].'
           </div>
-          <input type="hidden" id="id" name="id" value="'.$row['idItens'].'">
+          <input type="hidden" id="id'.$row['idItens'].'" name="id" value="'.$row['idItens'].'">
           <div class="modal-footer">
             <button type="submit" value="Cancelar" class="btn btn-default">Não</button>
             <button type="submit" name="update" value="Cadastrar" class="btn btn-primary">Sim</button>
