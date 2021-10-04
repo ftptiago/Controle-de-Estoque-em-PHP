@@ -11,11 +11,7 @@
 
   echo '<div class="content-wrapper">';
 
-if($perm != 1){
-          echo "Você não tem permissão! </div>";
-
-          exit();
-        }
+if($perm == 1){
 
   echo '<!-- Content Header (Page header) -->
       <section class="content-header">
@@ -110,6 +106,10 @@ if($perm != 1){
   echo '</div>';
   echo '</div>';
   echo '</section>';
+  
+}else{
+  echo '<p>Você não tem permissão para visualizar este conteúdo!</p>';
+}
   echo '</div>';
   echo  $footer;
   echo $javascript;

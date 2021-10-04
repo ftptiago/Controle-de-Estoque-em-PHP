@@ -561,8 +561,8 @@ $header = '<header class="main-header">
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="'.$url.'representante/"><i class="fa fa-circle-o"></i>Representantes</a></li>
-            <li><a href="'.$url.'representante/addRepresentante.php"><i class="fa fa-circle-o"></i>Add Representante</a></li>
+            <li><a href="'.$url.'representante/"><i class="fa fa-circle-o"></i>Representantes</a></li>            
+            <li><a href="'.$url.'representante/addrepresentante.php"><i class="fa fa-circle-o"></i>Add Representante</a></li>
           </ul>
         </li>
 

@@ -40,17 +40,23 @@ echo $aside;
             <div class="box-body">
                
               <div>
+
+                <?php 
+                  if($perm == 1){
+                ?>
                 <form action="" method="POST">
                   <select name="produto">
 
                   <option value="">Nenhum</option>
                   <?php 
+                  
                   $relatorio = new Relatorio();
                   $resps = $relatorio->selectProduto($perm);
                   $resps = json_decode($resps, true);
                   foreach($resps as $resp){
                     echo '<option value="'.$resp['CodRefProduto'].'">'. utf8_decode($resp['NomeProduto']).'</option>';
                   } 
+
                   ?>
                    </select>
                   <div>                   
@@ -121,7 +127,11 @@ echo $aside;
                 
                 </tbody>
               </table>
-              </div> <!-- ul-result -->
+              </div> <!--result -->
+            <?php }else{
+              echo "<p>Você não tem permissão para visualizar este conteúdo!</p>";
+            } ?>
+
             </div> <!-- box-body -->
       </div><!--box-->
     </div><!--row -->

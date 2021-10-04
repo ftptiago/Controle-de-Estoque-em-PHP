@@ -65,7 +65,7 @@ echo '<div class="content-wrapper">
         }
 
 
-        $fabricante->index($value, $perm);
+        $fabricante->index($perm, $value);
 
         echo '</ul>
         <br/>

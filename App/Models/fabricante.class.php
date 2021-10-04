@@ -9,13 +9,13 @@
       class Fabricante extends Connect
      {
      	
-     	public function index($value = NULL, $perm)
+     	public function index($perm, $value = NULL)
      	{
 
         if($perm != 1){
           echo "Você não tem permissão!";
-          exit();
-        }
+          
+        }else{
 
         if($value == NULL){
           $value = 1;
@@ -88,6 +88,7 @@
                      				
      			}     			
      		}
+      }
 
      	}
 
@@ -117,8 +118,8 @@
 
         if($perm != 1){
           echo "Você não tem permissão!";
-          exit();
-        }
+          
+        }else{
 
         $this->query = "SELECT * FROM `fabricante` WHERE `NomeFabricante` = '$NomeFabricante'";
         $this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
@@ -157,6 +158,7 @@
             }
             
      	}//Insert
+    }
 
       
 
@@ -192,8 +194,8 @@
 
         if($perm != 1){
           echo "Você não tem permissão!";
-          exit();
-        }
+          
+        }else{
 
         $this->representante = "UPDATE `fabricante` SET `NomeFabricante`= '$NomeFabricante', `CNPJFabricante`='$CNPJFabricante',`EmailFabricante`='$EmailFabricante',`EnderecoFabricante`='$EnderecoFabricante',`TelefoneFabricante`='$TelefoneFabricante', `Ativo` = '$Ativo' ,`Usuario_idUser`='$idUsuario' WHERE `idFabricante` = '$idFabricante'";
 
@@ -204,8 +206,9 @@
                   header('Location: ../../views/fabricante/index.php?alert=0');
               } 
 
-
+        }
       }//update
+
 
       public function DelFabricante($idFabricante, $perm)
       {
