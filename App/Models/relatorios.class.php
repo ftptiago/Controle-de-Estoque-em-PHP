@@ -27,14 +27,17 @@
 			}
 		}
 		
-		public function qtdeItensEstoque($perm, $idProduto = null){
+		public function qtdeItensEstoque($perm, $status = null, $idProduto = null){
 			if($perm == 1){
 
 				if($idProduto != null){
-					$AND = "AND `Produto_CodRefProduto` = '$idProduto'";
+					$AND = "AND `Produto_CodRefProduto` = '$idProduto' AND `Ativo` = '$status'";
+				}elseif($status != null){
+					$AND = "AND `Ativo` = '$status'";
 				}else{
 					$AND = "";
 				}
+				
 
 				$query = "SELECT `Produto_CodRefProduto`, `NomeProduto`, SUM(`QuantItens`) AS QuantItens , SUM(`QuantItensVend`) AS QuantItensVend FROM `itens`, `produtos`
 				WHERE `Produto_CodRefProduto` = `CodRefProduto`

@@ -38,14 +38,17 @@ echo $aside;
           <!-- /.box-header -->
             
             <div class="box-body">
-               
-              <div>
+              <div class="col-md-12">
+                <section class="row">
+                
 
                 <?php 
                   if($perm == 1){
                 ?>
-                <form action="" method="POST">
-                  <select name="produto">
+                <form action="" method="POST" class="col-md-6 well">
+                  <div class="col-md-7">
+                  
+                  <select name="produto" class="form-control">
 
                   <option value="">Nenhum</option>
                   <?php 
@@ -59,24 +62,30 @@ echo $aside;
 
                   ?>
                    </select>
-                  <div>                   
-                    <select name="status">
+                 </div>
+                  <div class="col-md-3">                   
+                    <select name="status" class="form-control">
                       <option value="1">Ativo</option>
                       <option value="0">Inativo</option>
+                      <option value="">Todos</option>
                     </select>
                 </div>
-                  <button type="submit">Ver</button>
+              <div class="col-md-2">
+                  <button type="submit" class="btn btn-primary">Ver</button>
+                </div>
                 </form>
-              </div>
+              
 
-              <div id="ul-result">
+              <div id="ul-result" class="col-md-12">
                 <?php
                   if(isset($_POST['produto']) != null){
                         $idProduto = $_POST['produto'];
+                        $status = $_POST['status'];
                   ?>
                         <form id="produtos_selecionados" action="gerarcsv.php" method="post">
                           <input type="hidden" name="idproduto" value="<?php echo $idProduto; ?>">
-                          <button type="submit">Imprimir CSV</button>
+                          <input type="hidden" name="statusR" value="<?php echo $status; ?>">
+                          <button type="submit" class="btn btn-default">Imprimir CSV</button>
                         </form>
 
                 <?php    
@@ -88,13 +97,17 @@ echo $aside;
                         </form>';
                     }
                 ?>                
+                </section>
 
-                <table class="table">
+                <section>
+                <table id="mytable" class="table table-striped">
                   <thead>
                     <tr>
                       <th>Cód.:</th>
                       <th>Nome</th>
-                      <th>Qtde</th>
+                      <th>Qtde Comprada</th>
+                      <th>Qtde Vendida</th>
+                      <th>Qtde em estoque</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -102,7 +115,9 @@ echo $aside;
                     <?php
                     if(isset($_POST['produto']) != null){
                         $idProduto = $_POST['produto'];
-                        $rows = $relatorio->qtdeItensEstoque($perm, $idProduto);
+                        $status = $_POST['status'];
+
+                        $rows = $relatorio->qtdeItensEstoque($perm, $status, $idProduto);
                     }else{
                       $rows = $relatorio->qtdeItensEstoque($perm);
                     }
@@ -117,6 +132,8 @@ echo $aside;
                         echo '<tr> 
                                 <td>'.$row['Produto_CodRefProduto'].'</td>
                                 <td>'.$row['NomeProduto'].'</td>
+                                <td>'.$qi.'</td>
+                                <td>'.$qiv.'</td>
                                 <td>'.$r.'</td>
                               </tr>';
                         }
@@ -127,11 +144,12 @@ echo $aside;
                 
                 </tbody>
               </table>
+              </section>
               </div> <!--result -->
             <?php }else{
               echo "<p>Você não tem permissão para visualizar este conteúdo!</p>";
             } ?>
-
+          </div><!-- col-md-12 -->
             </div> <!-- box-body -->
       </div><!--box-->
     </div><!--row -->
