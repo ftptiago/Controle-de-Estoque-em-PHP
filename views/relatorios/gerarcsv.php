@@ -8,9 +8,10 @@ require_once '../../App/Models/relatorios.class.php';
    header( 'Pragma: no-cache');
 
    $relatorio = new Relatorio(); 
+   
    $out = fopen( 'php://output', 'w' );
     fputs($out, $result = (chr(0xEF) . chr(0xBB) . chr(0xBF)));
-    
+
    if(isset($_POST['idproduto']) != null && isset($_POST['statusR'])!= null){
         $idProduto = $_POST['idproduto'];
         $status = $_POST['statusR'];

@@ -34,7 +34,7 @@
 					$AND = "AND `Produto_CodRefProduto` = '$idProduto' AND `Ativo` = '$status'";
 				}elseif($status != null){
 					$AND = "AND `Ativo` = '$status'";
-				}else{
+				}else{ 
 					$AND = "";
 				}
 				
