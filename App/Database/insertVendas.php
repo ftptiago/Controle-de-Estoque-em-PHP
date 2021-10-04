@@ -1,6 +1,8 @@
 <?php
 require_once '../../App/auth.php';
+require_once '../../App/Models/connect.php';
 require_once '../../App/Models/vendas.class.php';
+
 
           if(isset($_POST['idItem']) > 0 && 
       		 !empty($_POST['qtd']) &&
@@ -11,7 +13,8 @@ require_once '../../App/Models/vendas.class.php';
             
             $cliente = $_POST['nomeCliente'];
             $email = $_POST['emailCliente'];
-            $cpfCliente = connect::limpaCPF_CNPJ($_POST['cpfcliente']);
+            $connect = new Connect;
+            $cpfCliente = $connect->limpaCPF_CNPJ($_POST['cpfcliente']);
             $cart = $_SESSION['cart'];
             
     foreach ($_POST['idItem'] as $key => $error) {

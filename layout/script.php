@@ -40,51 +40,14 @@ $head = '<!DOCTYPE html>
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="'.$url.'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
-
-<!-- Imprimir Venda -->
-
-  <script type="text/javascript">
-    
-    function cont(){
-       var conteudo = document.getElementById(\'print\').innerHTML;
-       tela_impressao = window.open(\'about:blank\');
-       tela_impressao.document.write(conteudo);
-       tela_impressao.window.print();
-       tela_impressao.window.close(); 
-    }
-
-</script>
-
-<!-- Imprimir Venda --> 
-
-  <script type="text/javascript">
-    $(document).ready(function(){
-    $("input[name=\'status[]\']").click(function(){
-      var $this = $( this );//guardando o ponteiro em uma variavel, por performance
-
-
-      var status = $this.attr(\'checked\') ? 1 : 0;
-      var id = $this.next(\'input\').val();
-
-
-      $.ajax({
-        url: \'action.php\',
-        type: \'GET\',
-        data: \'status=\'+status+\'&id=\'+id,
-        success: function( data ){
-          alert( data );
-        }
-      });
-    });
-  }); 
-  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <!-- Lista Cliente CPF -->
 
 <script type="text/javascript">
  
  $(document).ready(function(){  
+  
       $("#cpfCliente").keyup(function(){  
            var query = $(this).val();  
            if(query != "")  
@@ -150,6 +113,46 @@ $head = '<!DOCTYPE html>
     
  });  
  </script>
+
+<!-- Imprimir Venda -->
+
+  <script type="text/javascript">
+    
+    function cont(){
+       var conteudo = document.getElementById(\'print\').innerHTML;
+       tela_impressao = window.open(\'about:blank\');
+       tela_impressao.document.write(conteudo);
+       tela_impressao.window.print();
+       tela_impressao.window.close(); 
+    }
+
+</script>
+
+<!-- Imprimir Venda --> 
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+    $("input[name=\'status[]\']").click(function(){
+      var $this = $( this );//guardando o ponteiro em uma variavel, por performance
+
+
+      var status = $this.attr(\'checked\') ? 1 : 0;
+      var id = $this.next(\'input\').val();
+
+
+      $.ajax({
+        url: \'action.php\',
+        type: \'GET\',
+        data: \'status=\'+status+\'&id=\'+id,
+        success: function( data ){
+          alert( data );
+        }
+      });
+    });
+  }); 
+  </script>
+
+
 
  <script type="text/javascript">
 (function ($) {
@@ -823,7 +826,7 @@ $header = '<header class="main-header">
 
   </div>
 <!-- jQuery 2.2.3 -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.3.js"></script>
 
 <!-- jQuery UI 1.11.4 -->
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>

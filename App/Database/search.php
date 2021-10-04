@@ -4,10 +4,10 @@ require_once('../Models/cliente.class.php');
 
 $index = new Cliente;
  
-if($_POST["query"]){
+if(isset($_POST["query"])!= null){
 
 	$resp = $index->search($_POST["query"]);
-			//$users = json_decode($resp , true);
+			// $users = json_decode($resp , true);
 			//print_r($resp);
 	echo '<ul id="pesqcpf" class="list-unstyled ulcpf">';
 	if($resp == 0){
