@@ -1,9 +1,12 @@
 <?php
-$ref = explode('://', $_SERVER['HTTP_REFERER']);
-$ref = $ref[0].'://';
-$url = $ref.$_SERVER['HTTP_HOST'].'/Controle-de-Estoque-em-PHP/views/';
-
-//$url = 'http://localhost/Controle-de-Estoque-em-PHP/views/';
+/*
+  // Para utilização em hospedagem web
+    
+    $ref = explode('://', $_SERVER['HTTP_REFERER']);
+    $ref = $ref[0].'://';
+    $url = $ref.$_SERVER['HTTP_HOST'].'/views/';  
+*/
+$url = 'http://localhost/Controle-de-Estoque-em-PHP/views/'; // Remova em caso de utilizar o código para hospedagem web 
 
 $head = '<!DOCTYPE html>
 <html>
