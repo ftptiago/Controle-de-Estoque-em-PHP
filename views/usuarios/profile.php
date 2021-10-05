@@ -33,7 +33,22 @@ echo '<div class="content-wrapper">
 
               <h3 class="profile-username text-center">'.$username.'</h3>
 
-              <p class="text-muted text-center">Software Engineer</p>
+              <p class="text-muted text-center">'; 
+
+              switch($perm){
+                    
+                    case 0:
+                    $perfil = 'Cliente';
+                    break;
+                    case 1:
+                    $perfil = 'Administrador';
+                    break;
+                    case 2: 
+                    $perfil = 'Vendedor';
+                    break;
+                  }
+              echo $perfil; 
+              echo'</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">

@@ -1,6 +1,9 @@
 <?php
+$ref = explode('://', $_SERVER['HTTP_REFERER']);
+$ref = $ref[0].'://';
+$url = $ref.$_SERVER['HTTP_HOST'].'/Controle-de-Estoque-em-PHP/views/';
 
-$url = 'http://localhost/Controle-de-Estoque-em-PHP/views/';
+//$url = 'http://localhost/Controle-de-Estoque-em-PHP/views/';
 
 $head = '<!DOCTYPE html>
 <html>
@@ -39,7 +42,7 @@ $head = '<!DOCTYPE html>
   
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="'.$url.'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-  
+  <script src="https://apis.google.com/js/platform.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <!-- Lista Cliente CPF -->
@@ -208,7 +211,7 @@ $head = '<!DOCTYPE html>
 
 $header = '<header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="'.$url.'" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -428,8 +431,21 @@ $header = '<header class="main-header">
                 <img src="'.$url.''.$foto.'" class="img-circle" alt="User Image">
 
                 <p>
-                  '.$username .' - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  '.$username .' - ';
+                  switch($perm){
+                    
+                    case 0:
+                    $header .= 'Cliente';
+                    break;
+                    case 1:
+                    $header .= 'Administrador';
+                    break;
+                    case 2: 
+                    $header .= 'Vendedor';
+                    break;
+                  }
+
+         $header .=' <small>Member since Nov. 2012</small>
                 </p>
               </li>
               <!-- Menu Body -->
