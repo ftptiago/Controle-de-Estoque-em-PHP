@@ -117,7 +117,7 @@ if (isset($_POST['CPF'])) {
         <div class="row">
 
           <div class="form-group col-xs-12 col-sm-4">
-            <input type="text" id="idItem" name="item" class="form-control" placeholder="Código do Produto" autocomplete="off">
+            <input type="text" id="idItem" name="item" class="form-control" placeholder="Código ou nome do Produto" autocomplete="off">
             <div id="ListProd"></div>
           </div>
 
