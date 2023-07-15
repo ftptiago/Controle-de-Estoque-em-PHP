@@ -8,7 +8,7 @@ class Connect
 
 	var $localhost = "localhost";
 	var $root = "root";
-	var $passwd = "";
+	var $passwd = "root";
 	var $database = "controlestoque";
 	var $SQL;
 

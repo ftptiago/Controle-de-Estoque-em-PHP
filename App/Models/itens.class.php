@@ -284,7 +284,7 @@
     {
       if (isset($value)) {
         //$output = '';  
-        $query = "SELECT P.CodRefProduto, P.NomeProduto, I.idItens, I.Produto_CodRefProduto, I.* FROM itens AS I, produtos AS P WHERE (I.Produto_CodRefProduto = P.CodRefProduto) AND (I.Produto_CodRefProduto LIKE '" . $value . "%' OR P.NomeProduto LIKE '" . $value . "%') GROUP BY I.idItens, P.CodRefProduto LIMIT 5";
+        $query = "SELECT P.CodRefProduto, P.NomeProduto, I.idItens, I.Produto_CodRefProduto, I.* FROM itens AS I, produtos AS P WHERE (I.Produto_CodRefProduto = P.CodRefProduto) AND (I.Produto_CodRefProduto LIKE '" . $value . "%' OR P.NomeProduto LIKE '%" . $value . "%') GROUP BY I.idItens, P.CodRefProduto LIMIT 5";
         $result = mysqli_query($this->SQL, $query);
 
         if (mysqli_num_rows($result) > 0) {

@@ -127,13 +127,18 @@ $head = '<!DOCTYPE html>
 
       $("#prodSubmit").click(function()  {
     var prodSubmit = $("#prodSubmit").val();
-    var idItem = $("#idItem").val();
-    var qtd = $("#qtd").val();
+    var idItens = $("#idItem").val();
+    var idItens = idItens.split(\' - \');
+    var idItem = idItens[0];
+    var nameprod = idItens[1];
+    var qtde = $("#qtd").val();
+
+    console.log(idItem);
     
     $.ajax({
       type: "POST",
       url: "' . $url . '../App/Database/carrinho.php",
-      data: {prodSubmit: prodSubmit, idItem: idItem, qtd:qtd},
+      data: {prodSubmit: prodSubmit, idItem: idItem, nameprod: nameprod, qtde:qtde},
       success: function(data){
               $(\'#listable\').fadeIn();  
               $(\'#listable\').html(data);

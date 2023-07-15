@@ -1,9 +1,9 @@
 <?php
 require_once '../auth.php';
 
-	$idProduto = $_GET['id'];
+$idProduto = $_GET['id'];
 
-if(isset($_GET['remover']) && $_GET['remover'] == "carrinho"){
+if (isset($_GET['remover']) && $_GET['remover'] == "carrinho") {
 
 	$idProduto = $_GET['id'];
 
@@ -11,5 +11,3 @@ if(isset($_GET['remover']) && $_GET['remover'] == "carrinho"){
 
 	echo "<meta http-equiv='refresh' content='0;URL=../../views/vendas/'>";
 }
-
-?>

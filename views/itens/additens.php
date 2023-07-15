@@ -73,11 +73,11 @@ echo '
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">DataCompraItens</label>
-                  <input type="text" name="DataCompraItens" class="form-control" id="exampleInputEmail1" placeholder="DataCompraItens">
+                  <input type="date" name="DataCompraItens" class="form-control" id="exampleInputEmail1" placeholder="DataCompraItens">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">DataVenci_Itens</label>
-                  <input type="text" name="DataVenci_Itens" class="form-control" id="exampleInputEmail1" placeholder="DataVenci_Itens">
+                  <input type="date" name="DataVenci_Itens" class="form-control" id="exampleInputEmail1" placeholder="DataVenci_Itens">
                 </div>
 
                 <div class="form-group">
@@ -108,4 +108,3 @@ echo '</section>';
 echo '</div>';
 echo  $footer;
 echo $javascript;
-?>
