@@ -12,19 +12,19 @@ class Vendas extends Connect
   public function itensVerify($iditem, $quant, $perm)
   {
 
-    if ($perm < 1 || $perm > 2) {
+    if ($perm > 2) {
       $_SESSION['msg'] =  'Erro - Você não tem permissão!';
       header('Location: ../../views/vendas/index.php');
       exit();
     }
 
-    $this->query = "SELECT * FROM `itens`, `produtos` WHERE `idItens` = '$iditem' AND `Produto_CodRefProduto` = `CodRefProduto`";
-    $this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL));
-    $total = mysqli_num_rows($this->result);
+    $query = "SELECT * FROM `itens`, `produtos` WHERE `idItens` = '$iditem' AND `Produto_CodRefProduto` = `CodRefProduto`";
+    $result = mysqli_query($this->SQL, $query) or die(mysqli_error($this->SQL));
+    $total = mysqli_num_rows($result);
 
     if ($total > 0) {
 
-      if ($row = mysqli_fetch_array($this->result)) {
+      if ($row = mysqli_fetch_array($result)) {
 
         $q = $row['QuantItens'];
         $v = $row['QuantItensVend'];
@@ -48,12 +48,15 @@ class Vendas extends Connect
     }
   }
 
-  public function itensVendidos($iditem, $quant, $cliente, $email, $cpfcliente, $cart, $idUsuario, $perm)
+  public function itensVendidos($iditem, $quant, $cliente, $email, $cpfcliente, $cart, $idUsuario, $perm, $block = null)
   {
 
     $cpfcliente = intval(Connect::limpaCPF_CNPJ($cpfcliente));
+    $idCliente = Vendas::idCliente($cpfcliente); // Verifica se o cliente existe no DB.
 
-    if ($perm != 2) {
+    $jaComprou = (new Vendas)->jaComprou($idCliente, $iditem, $block);
+
+    if ($perm > 2) {
       $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible">
                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                          <strong>Erro!</strong> Você não tem permissão! </div>';
@@ -65,16 +68,22 @@ class Vendas extends Connect
       <strong>Erro!</strong> Cadastre um Cliente! </div>';
       header('Location: ../../views/vendas/index.php');
       exit();
+    } elseif ($jaComprou >= 3) {
+      $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Erro!</strong> O Cliente já efetuou "' . $jaComprou . '" compras este ano! </div>';
+      header('Location: ../../views/vendas/index.php');
+      exit();
     }
 
-    $this->query = "SELECT * FROM `itens` WHERE `idItens`= '$iditem'";
-    $this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL));
+    $query = "SELECT * FROM `itens` WHERE `idItens`= '$iditem'";
+    $result = mysqli_query($this->SQL, $query) or die(mysqli_error($this->SQL));
 
-    if ($this->result) {
+    if ($result) {
 
       //------Verificação da Venda-----------
 
-      if ($row = mysqli_fetch_array($this->result)) {
+      if ($row = mysqli_fetch_array($result)) {
 
         $q = $row['QuantItens'];
         $v = $row['QuantItensVend'];
@@ -85,27 +94,24 @@ class Vendas extends Connect
 
           $valor = ($row['ValVendItens'] * $quant);
 
-          $id = Vendas::idCliente($cpfcliente); // Verifica se o cliente existe no DB.
-
-
-          if ($id > 0) { // Se o cliente existir, Retorne o ID do cliente
-            $idCliente = $id; // ID do cliente
+          if ($idCliente > 0) { // Se o cliente existir, Retorne o ID do cliente
+            $idCliente = $idCliente; // ID do cliente
           } else {
 
-            $this->novoclient = "INSERT INTO `cliente`(`idCliente`, `NomeCliente`, `EmailCliente`, `cpfCliente`, `statusCliente`, `Usuario_idUsuario`) VALUES (NULL,'$cliente','$email','$cpfcliente',1,'$idUsuario')";
+            $novoclient = "INSERT INTO `cliente`(`idCliente`, `NomeCliente`, `EmailCliente`, `cpfCliente`, `statusCliente`, `Usuario_idUsuario`) VALUES (NULL,'$cliente','$email','$cpfcliente',1,'$idUsuario')";
 
-            if (mysqli_query($this->SQL, $this->novoclient) or die(mysqli_error($this->SQL))) {
+            if (mysqli_query($this->SQL, $novoclient) or die(mysqli_error($this->SQL))) {
               $idCliente = mysqli_insert_id($this->SQL);
             }
           }
 
 
-          $this->query = "INSERT INTO `vendas`(`idvendas`, `quantitens`, `valor`, `iditem`, `cart`, `cliente_idCliente`, `idusuario`) VALUES (NULL, '$quant', '$valor', '$iditem', '$cart', '$idCliente', '$idUsuario')";
-          if ($this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))) {
+          $query = "INSERT INTO `vendas`(`idvendas`, `quantitens`, `valor`, `iditem`, `cart`, `cliente_idCliente`, `idusuario`) VALUES (NULL, '$quant', '$valor', '$iditem', '$cart', '$idCliente', '$idUsuario')";
+          if ($result = mysqli_query($this->SQL, $query) or die(mysqli_error($this->SQL))) {
 
 
-            $this->query = "UPDATE `itens` SET `QuantItensVend` = '$quantotal' WHERE `idItens`= '$iditem'";
-            if ($this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))) {
+            $query = "UPDATE `itens` SET `QuantItensVend` = '$quantotal' WHERE `idItens`= '$iditem'";
+            if ($result = mysqli_query($this->SQL, $query) or die(mysqli_error($this->SQL))) {
 
               //limpa itens da lista
               unset(
@@ -123,8 +129,8 @@ class Vendas extends Connect
             }
           } else {
             $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible">
-                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                         <strong>Erro!</strong> Venda não efetuada! </div>';
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Erro!</strong> Venda não efetuada! </div>';
 
             header('Location: ../../views/vendas/');
             exit();
@@ -155,11 +161,11 @@ class Vendas extends Connect
   public function idcliente($cpfCliente)
   {
 
-    $this->client = "SELECT * FROM `cliente` WHERE `cpfCliente` = '$cpfCliente'";
+    $client = "SELECT * FROM `cliente` WHERE `cpfCliente` = '$cpfCliente'";
 
-    if ($this->resultcliente = mysqli_query($this->SQL, $this->client)  or die(mysqli_error($this->SQL))) {
+    if ($resultcliente = mysqli_query($this->SQL, $client)  or die(mysqli_error($this->SQL))) {
 
-      $row = mysqli_fetch_array($this->resultcliente);
+      $row = mysqli_fetch_array($resultcliente);
       return $idCliente = $row['idCliente'];
     }
   }
@@ -189,9 +195,9 @@ class Vendas extends Connect
 
     $query = "SELECT * FROM `vendas` WHERE `cart` = '$cart' ";
 
-    if ($this->result = mysqli_query($this->SQL, $query)  or die(mysqli_error($this->SQL))) {
+    if ($result = mysqli_query($this->SQL, $query)  or die(mysqli_error($this->SQL))) {
 
-      while ($row = mysqli_fetch_array($this->result)) {
+      while ($row = mysqli_fetch_array($result)) {
         $out[] = $row;
       }
     }
@@ -204,15 +210,30 @@ class Vendas extends Connect
 
     $query = "SELECT * FROM `fabricante`, `produtos`, `itens` WHERE `idItens` = '$idItem' AND `Produto_CodRefProduto` = `CodRefProduto` AND `Fabricante_idFabricante` = `idFabricante`";
 
-    if ($this->result = mysqli_query($this->SQL, $query)  or die(mysqli_error($this->SQL))) {
+    if ($result = mysqli_query($this->SQL, $query)  or die(mysqli_error($this->SQL))) {
 
-      $row = mysqli_fetch_array($this->result);
+      $row = mysqli_fetch_array($result);
 
       return $row;
     }
   } //---dadosItem
 
+  public function jaComprou($idCliente, $idItem = null, $block = null)
+  {
+    if ($block != null) {
+      $AND = " AND `iditem` = '$idItem'";
+    } else {
+      $AND = "";
+    }
+    $Ano = date('Y');
+    $dataAno = $Ano . '-01-01 00:00:00';
+    $dataIn = $dataAno;
+    $dataFim = date('Y-m-d H:i:s');
 
+    $query = "SELECT COUNT(*) AS TOTAL FROM `vendas` WHERE `cliente_idCliente` = '$idCliente' AND (`datareg` BETWEEN '$dataIn' AND '$dataFim' $AND)";
+    $result = mysqli_query($this->SQL, $query);
 
-
-}//Class
+    $row = mysqli_fetch_assoc($result);
+    return $row['TOTAL'];
+  }
+}//Fim Class Vendas

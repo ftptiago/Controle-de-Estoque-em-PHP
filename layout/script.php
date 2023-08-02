@@ -20,6 +20,7 @@ $head = '<!DOCTYPE html>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="' . $url . 'bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="' . $url . 'plugins/datatables/dataTables.bootstrap.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -41,6 +42,7 @@ $head = '<!DOCTYPE html>
   <link rel="stylesheet" href="' . $url . 'plugins/daterangepicker/daterangepicker.css">
 
   <link rel="stylesheet" href="' . $url . 'plugins/datatables/dataTables.bootstrap.css">
+  
   
   
   <!-- bootstrap wysihtml5 - text editor -->
@@ -595,7 +597,8 @@ $aside = '<!-- Left side column. contains the logo and sidebar -->
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="' . $url . 'relatorios/"><i class="fa fa-circle-o"></i>Relatorios</a></li>
+            <li><a href="' . $url . 'relatorios/"><i class="fa fa-circle-o"></i>Relatorios Produtos</a></li>
+            <!--<li><a href="' . $url . 'relatorios/compclientes.php"><i class="fa fa-circle-o"></i>Relatorios Clientes</a></li>-->
             
           </ul>
         </li>
@@ -910,6 +913,9 @@ $javascript = '
 <script src="' . $url . 'plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="' . $url . 'plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="' . $url . 'plugins/datatables/dataTables.bootstrap.min.js"></script>
+
 <script src="' . $url . 'plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="' . $url . 'plugins/datepicker/bootstrap-datepicker.js"></script>
@@ -925,7 +931,6 @@ $javascript = '
 <script src="' . $url . 'dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="' . $url . 'dist/js/demo.js"></script>
-<script src="' . $url . 'plugins/datatables/jquery.dataTables.min.js"></script>
 <script>
   
   $(function () {
@@ -938,7 +943,7 @@ $javascript = '
       \'info\'        : true,
       \'autoWidth\'   : false
     })
-  })
+})
 </script>
 
 </body>

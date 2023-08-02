@@ -105,6 +105,13 @@ if (isset($_POST['CPF'])) {
                                                                                                                                 echo $_SESSION['CPF'];
                                                                                                                               } ?>" />
         </div>
+        <hr />
+        <div class="form-group">
+          <label for="block" class="btn label-info"><b>Bloquear compras por produto.</b>
+            <input type="checkbox" id="block" name="block" checked />
+          </label>
+        </div>
+
       </div>
       <!-- Tabela de produtos -->
       <div class="col-md-12">
