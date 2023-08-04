@@ -40,7 +40,7 @@ if (
         $id = $_POST['idItem'][$key];
         $quant = $_POST['qtd'][$key];
 
-        $block = !empty($_POST['block'] ?? null);
+        $block = !empty($_POST['block']) ?? null;
 
         $vendas = new Vendas;
         $vendas->itensVendidos($id, $quant, $cliente, $email, $cpfCliente, $cart, $idUsuario, $perm, $block);
