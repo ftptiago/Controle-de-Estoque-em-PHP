@@ -7,8 +7,8 @@ class Connect
 {
 
 	var $localhost = "localhost";
-	var $root = "root";
-	var $passwd = "root";
+	var $root = "root"; // Aqui vai o nome do usuário do seu Banco de dados MySQL.
+	var $passwd = "";   // Aqui vai a senha do seu Banco de dados MySQL.
 	var $database = "controlestoque";
 	var $SQL;
 

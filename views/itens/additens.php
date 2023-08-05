@@ -45,8 +45,8 @@ echo '
 
             <select class="form-control" name="codProduto">
             ';
-            $produtos->listProdutos();
-            echo '</select>
+$produtos->listProdutos();
+echo '</select>
             </div>
 
             <div class="form-group">
@@ -54,8 +54,8 @@ echo '
 
             <select class="form-control" name="idFabricante">
             ';
-            $fabricante->listfabricante();
-            echo '</select>
+$fabricante->listfabricante();
+echo '</select>
             </div>
 
                 <div class="form-group">
@@ -65,11 +65,11 @@ echo '
 
                 <div class="form-group">
                   <label for="exampleInputEmail1">ValCompItens</label>
-                  <input type="text" name="ValCompItens" class="form-control" id="exampleInputEmail1" placeholder="ValCompItens">
+                  <input type="text" name="ValCompItens" class="form-control" id="exampleInputEmail1" placeholder="ValCompItens" value="1">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">ValVendItens</label>
-                  <input type="text" name="ValVendItens" class="form-control" id="exampleInputEmail1" placeholder="ValVendItens">
+                  <input type="text" name="ValVendItens" class="form-control" id="exampleInputEmail1" placeholder="ValVendItens" value="1">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">DataCompraItens</label>
@@ -87,7 +87,7 @@ echo '
                 </div>
                  <input type="hidden" name="valor" value="#">
                            
-                 <input type="hidden" name="iduser" value="'.$idUsuario.'">
+                 <input type="hidden" name="iduser" value="' . $idUsuario . '">
 
 
               <!-- /.box-body -->

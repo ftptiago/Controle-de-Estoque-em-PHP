@@ -5,20 +5,20 @@ require_once '../../App/Models/produtos.class.php';
 require_once '../../App/Models/fabricante.class.php';
 require_once '../../App/Models/itens.class.php';
 
-if(isset($_GET['q'])){
+if (isset($_GET['q'])) {
 
-$resp = $itens->editItens($_GET['q']);
+  $resp = $itens->editItens($_GET['q']);
 
 
-echo $head;
-echo $header;
-echo $aside;
-echo '<div class="content-wrapper">';
+  echo $head;
+  echo $header;
+  echo $aside;
+  echo '<div class="content-wrapper">';
 
-echo '<!-- Content Header (Page header) -->
+  echo '<!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Adicionar <small>Produtos</small>
+        Editar <small>Produtos</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="../"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -32,7 +32,7 @@ echo '<!-- Content Header (Page header) -->
       <div class="row">';
 
 
-echo ' 
+  echo ' 
       <div class="row">
         <!-- left column -->
         <div class="col-md-6">
@@ -50,8 +50,8 @@ echo '
 
             <select class="form-control" name="codProduto">
             ';
-            $produtos->listProdutos($resp['Itens']['CodRefProduto']);
-            echo '</select>
+  $produtos->listProdutos($resp['Itens']['CodRefProduto']);
+  echo '</select>
             </div>
 
             <div class="form-group">
@@ -59,41 +59,41 @@ echo '
 
             <select class="form-control" name="idFabricante">
             ';
-            $fabricante->listfabricante($resp['Itens']['idFabricante']);
-            echo '</select>
+  $fabricante->listfabricante($resp['Itens']['idFabricante']);
+  echo '</select>
             </div>
 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">QuantItens</label>
-                  <input type="text" name="QuantItens" class="form-control" id="exampleInputEmail1" placeholder="QuantItens" value="'.$resp['Itens']['QuantItens'].'">
+                <label for="exampleInputEmail1">QuantItens</label>
+                  <input type="text" name="QuantItens" class="form-control" id="exampleInputEmail1" placeholder="QuantItens" value="' . $resp['Itens']['QuantItens'] . '">
                 </div>
 
                 <div class="form-group">
                   <label for="exampleInputEmail1">ValCompItens</label>
-                  <input type="text" name="ValCompItens" class="form-control" id="exampleInputEmail1" placeholder="ValCompItens" value="'.$resp['Itens']['ValCompItens'].'">
+                  <input type="text" name="ValCompItens" class="form-control" id="exampleInputEmail1" placeholder="ValCompItens" value="' . $resp['Itens']['ValCompItens'] . '">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">ValVendItens</label>
-                  <input type="text" name="ValVendItens" class="form-control" id="exampleInputEmail1" placeholder="ValVendItens" value="'.$resp['Itens']['ValVendItens'].'">
+                  <input type="text" name="ValVendItens" class="form-control" id="exampleInputEmail1" placeholder="ValVendItens" value="' . $resp['Itens']['ValVendItens'] . '">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">DataCompraItens</label>
-                  <input type="text" name="DataCompraItens" class="form-control" id="exampleInputEmail1" placeholder="DataCompraItens" value="'.$resp['Itens']['DataCompraItens'].'">
+                  <input type="text" name="DataCompraItens" class="form-control" id="exampleInputEmail1" placeholder="DataCompraItens" value="' . $resp['Itens']['DataCompraItens'] . '">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">DataVenci_Itens</label>
-                  <input type="text" name="DataVenci_Itens" class="form-control" id="exampleInputEmail1" placeholder="DataVenci_Itens" value="'.$resp['Itens']['DataVenci_Itens'].'">
+                  <input type="text" name="DataVenci_Itens" class="form-control" id="exampleInputEmail1" placeholder="DataVenci_Itens" value="' . $resp['Itens']['DataVenci_Itens'] . '">
                 </div>
 
                 <div class="form-group">
-                <img src="../'.$resp['Itens']['Image'].'" width="50" >
-                  <label for="exampleInputEmail1">Imagem '.$resp['Itens']['Image'].'</label>
+                <img src="../' . $resp['Itens']['Image'] . '" width="50" >
+                  <label for="exampleInputEmail1">Imagem ' . $resp['Itens']['Image'] . '</label>
                   <input type="file" name="arquivo" class="form-control">
                 </div>
-                 <input type="hidden" name="valor" value="'.$resp['Itens']['Image'].'">
+                 <input type="hidden" name="valor" value="' . $resp['Itens']['Image'] . '">
 
-                 <input type="hidden" name="iduser" value="'.$idUsuario.'">
-                 <input type="hidden" name="idItens" value="'.$resp['Itens']['idItens'].'">
+                 <input type="hidden" name="iduser" value="' . $idUsuario . '">
+                 <input type="hidden" name="idItens" value="' . $resp['Itens']['idItens'] . '">
 
 
               <!-- /.box-body -->
@@ -108,13 +108,12 @@ echo '
           </div>
 </div>';
 
-echo '</div>';
-echo '</div>';
-echo '</section>';
-echo '</div>';
-echo  $footer;
-echo $javascript;
-}else{
-	header('Location: ./');
+  echo '</div>';
+  echo '</div>';
+  echo '</section>';
+  echo '</div>';
+  echo  $footer;
+  echo $javascript;
+} else {
+  header('Location: ./');
 }
-?>

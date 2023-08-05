@@ -91,7 +91,7 @@ echo '
       <div class="row">
 
         <div class="col-md-12 text-center">
-          <img class="rounded" style="max-width:60%;" src="dist/img/logo.png" alt="logo" /> 
+          <img class="rounded" style="max-width:60%;" src="dist/img/logo_pix.png" alt="logo" /> 
         </div>
         <div class="col-md-12 text-center">  
         <h1 style="text-align:center" > Olá <b>'.$username.'</b>, seja bem vindo <br> ao seu Controle de estoque em PHP!</h1>
@@ -111,4 +111,3 @@ echo '
 ';
 echo  $footer;
 echo $javascript;
-?>

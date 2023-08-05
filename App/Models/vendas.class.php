@@ -71,7 +71,7 @@ class Vendas extends Connect
     } elseif ($jaComprou >= 3) {
       $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>Erro!</strong> O Cliente já efetuou "' . $jaComprou . '" compras este ano! </div>';
+      <strong>Erro!</strong> O Cliente já efetuou "' . $jaComprou . '" compras este ano do produto Cód.:' . $iditem . '! </div>';
       header('Location: ../../views/vendas/index.php');
       exit();
     }
@@ -220,20 +220,21 @@ class Vendas extends Connect
 
   public function jaComprou($idCliente, $idItem = null, $block = null)
   {
-    if ($block != null) {
-      $AND = " AND `iditem` = '$idItem'";
+    if (!empty($block)) {
+
+
+      $Ano = date('Y');
+      $dataAno = $Ano . '-01-01 00:00:00';
+      $dataIn = $dataAno;
+      $dataFim = date('Y-m-d H:i:s');
+
+      $query = "SELECT COUNT(*) AS TOTAL FROM `vendas` WHERE `cliente_idCliente` = '$idCliente' AND (`datareg` BETWEEN '$dataIn' AND '$dataFim' AND `iditem` = '$idItem')";
+      $result = mysqli_query($this->SQL, $query);
+
+      $row = mysqli_fetch_assoc($result);
+      return $row['TOTAL'];
     } else {
-      $AND = "";
+      return 0;
     }
-    $Ano = date('Y');
-    $dataAno = $Ano . '-01-01 00:00:00';
-    $dataIn = $dataAno;
-    $dataFim = date('Y-m-d H:i:s');
-
-    $query = "SELECT COUNT(*) AS TOTAL FROM `vendas` WHERE `cliente_idCliente` = '$idCliente' AND (`datareg` BETWEEN '$dataIn' AND '$dataFim' $AND)";
-    $result = mysqli_query($this->SQL, $query);
-
-    $row = mysqli_fetch_assoc($result);
-    return $row['TOTAL'];
   }
 }//Fim Class Vendas
