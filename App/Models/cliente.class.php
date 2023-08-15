@@ -44,6 +44,7 @@ class Cliente extends Connect
 
         if($idCliente > 0){
           return 2;
+	  exit();
         }else{
 
         $NomeCliente = mysqli_real_escape_string($this->SQL, $NomeCliente);
