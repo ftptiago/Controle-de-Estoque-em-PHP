@@ -51,7 +51,7 @@ class Vendas extends Connect
   public function itensVendidos($iditem, $quant, $cliente, $email, $cpfcliente, $cart, $idUsuario, $perm, $block = null)
   {
 
-    $cpfcliente = intval(Connect::limpaCPF_CNPJ($cpfcliente));
+    $cpfcliente = Connect::limpaCPF_CNPJ($cpfcliente);
     $idCliente = Vendas::idCliente($cpfcliente); // Verifica se o cliente existe no DB.
 
     $jaComprou = (new Vendas)->jaComprou($idCliente, $iditem, $block);
