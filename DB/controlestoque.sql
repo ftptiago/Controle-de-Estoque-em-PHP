@@ -35,11 +35,11 @@ CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
   `NomeCliente` varchar(100) NOT NULL,
   `EmailCliente` varchar(100) NOT NULL,
-  `cpfCliente` text NOT NULL,
+  `cpfCliente` varchar(11) NOT NULL,
   `statusCliente` int(1) NOT NULL,
   `Usuario_idUsuario` int(11) NOT NULL,
   `dataRegCliente` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Despejando dados para a tabela `cliente`
@@ -227,7 +227,7 @@ CREATE TABLE `vendas` (
   `cliente_idCliente` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `datareg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Despejando dados para a tabela `vendas`
