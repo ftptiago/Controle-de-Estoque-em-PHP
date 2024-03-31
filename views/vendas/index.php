@@ -71,7 +71,8 @@ if (isset($_POST['CPF'])) {
     <div class="box-body">
       <div class="col-lg-6">
         <div class="input-group">
-          <input type="text" class="form-control" id="cpfCliente" name="CPF" placeholder="Digite o CPF ou Nome" autocomplete="off">
+          <input type="text" class="form-control" id="cpfCliente" name="CPF" placeholder="Digite o CPF ou Nome"
+            autocomplete="off">
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-floppy-save"></span></button>
           </span>
@@ -89,25 +90,33 @@ if (isset($_POST['CPF'])) {
       <div class="col-md-6">
         <div class="form-group">
           <label for="exampleInputEmail1">Nome Cliente</label>
-          <input type="text" name="nomeCliente" class="form-control" id="exampleInputnome1" placeholder="Nome Cliente" value="<?php if (isset($_SESSION['Cliente'])) {
+          <input type="text" name="nomeCliente" class="form-control" id="exampleInputnome1" placeholder="Nome Cliente"
+            value="<?php if (isset($_SESSION['Cliente'])) {
                                                                                                                                 echo $_SESSION['Cliente'];
                                                                                                                               } ?>" />
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">E-mail</label>
-          <input type="text" name="emailCliente" class="form-control" id="exampleInputEmail1" placeholder="E-mail" value="<?php if (isset($_SESSION['Email'])) {
+          <input type="text" name="emailCliente" class="form-control" id="exampleInputEmail1" placeholder="E-mail"
+            value="<?php if (isset($_SESSION['Email'])) {
                                                                                                                             echo $_SESSION['Email'];
                                                                                                                           } ?>" />
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">CPF</label>
-          <input type="number" name="cpfcliente" class="form-control col-sm-6" id="exampleInputcpf1" placeholder="CPF" value="<?php if (isset($_SESSION['CPF'])) {
+          <input type="number" name="cpfcliente" class="form-control col-sm-6" id="exampleInputcpf1" placeholder="CPF"
+            value="<?php if (isset($_SESSION['CPF'])) {
                                                                                                                                 echo $_SESSION['CPF'];
                                                                                                                               } ?>" />
         </div>
         <hr />
         <div class="form-group">
-          <label for="block" class="btn label-info"><b>Bloquear compras por produto.</b>
+          <!-- Quando este bloqueio estiver ativo o produto selecionado não poderá 
+          ser vendido para o mesmo cliente por mais de três vezes sendo um item 
+          por vez no ano vigente.  -->
+          <label for="block" class="btn label-info"
+            title="Quando este bloqueio estiver ativo o produto selecionado não poderá ser vendido para o mesmo cliente por mais de três vezes sendo um item por vez no ano vigente."><b>Bloquear
+              compras por produto.</b>
             <input type="checkbox" id="block" name="block" checked />
           </label>
         </div>
@@ -119,7 +128,8 @@ if (isset($_POST['CPF'])) {
       </div>
 
       <div class="form-group col-xs-12 col-sm-4">
-        <input type="text" id="idItem" name="item" class="form-control" placeholder="Código ou nome do Produto" autocomplete="off">
+        <input type="text" id="idItem" name="item" class="form-control" placeholder="Código ou nome do Produto"
+          autocomplete="off">
         <div id="ListProd"></div>
       </div>
 
@@ -130,7 +140,8 @@ if (isset($_POST['CPF'])) {
       </div>
 
       <div class="form-group col-xs-12 col-sm-4">
-        <button type="button" id="prodSubmit" name="prodSubmit" onclick="prodSubmit;" value="carrinho" class="btn btn-primary col-xs-12">Registrar</button>
+        <button type="button" id="prodSubmit" name="prodSubmit" onclick="prodSubmit;" value="carrinho"
+          class="btn btn-primary col-xs-12">Registrar</button>
       </div>
     </div>
 

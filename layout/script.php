@@ -675,7 +675,7 @@ $aside = '<!-- Left side column. contains the logo and sidebar -->
         </li>
 
         
-        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li><a href="https://adminlte.io/themes/AdminLTE/index.html" target="_blank"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
