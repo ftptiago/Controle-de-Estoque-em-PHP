@@ -58,8 +58,8 @@ class Vendas extends Connect
 
     if ($perm > 2) {
       $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible">
-                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                         <strong>Erro!</strong> Você não tem permissão! </div>';
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<strong>Erro!</strong> Você não tem permissão! </div>';
       header('Location: ../../views/vendas/index.php');
       exit();
     } elseif ($cpfcliente == null && $cliente == null && $email == null && $cart == null) {
